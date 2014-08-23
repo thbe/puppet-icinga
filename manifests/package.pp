@@ -17,9 +17,12 @@ class icinga::package {
   package { $icinga::params::packageIdoMysql: ensure => installed; }
   package { $icinga::params::packageIdoutilsMysql: ensure => installed; }
   package { $icinga::params::packagePlugins: ensure => installed; }
+  package { $icinga::params::packagePluginsPerl: ensure => installed; }
   package { $icinga::params::packagePluginsAll: ensure => installed; }
   package { $icinga::params::packagePhpCommon: ensure => installed; }
   package { $icinga::params::packagePhpMysql: ensure => installed; }
   package { $icinga::params::packagePhpLdap: ensure => installed; }
   package { $icinga::params::packagePhpGd: ensure => installed; }
+  package { $icinga::params::packageNetSnmp: ensure => installed; }
+  package { $icinga::params::packageNetSnmpDevel: ensure => installed; }
 }

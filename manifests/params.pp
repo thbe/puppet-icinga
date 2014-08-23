@@ -24,11 +24,14 @@ class icinga::params {
       $packageIdoMysql         = 'icinga2-ido-mysql'
       $packageIdoutilsMysql    = 'icinga-idoutils-libdbi-mysql'
       $packagePlugins          = 'nagios-plugins'
+      $packagePluginsPerl      = 'nagios-plugins-perl'
       $packagePluginsAll       = 'nagios-plugins-all'
       $packagePhpCommon        = 'php'
       $packagePhpMysql         = 'php-mysql'
       $packagePhpLdap          = 'php-ldap'
       $packagePhpGd            = 'php-gd'
+      $packageNetSnmp          = 'net-snmp'
+      $packageNetSnmpDevel     = 'net-snmp-devel'
 
       #gd gd-devel openssl-devel
       #libdbi libdbi-dbd-mysql libdbi-devel libdbi-drivers
