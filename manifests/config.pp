@@ -62,7 +62,7 @@ class icinga::config {
     },
   }
 
-  class { 'mysql::server::backup':
+  class { '::mysql::server::backup':
     backupdir      => '/srv/mysql',
     backuppassword => '0nly4install',
     backupuser     => 'bckadm',
@@ -78,13 +78,16 @@ class icinga::config {
   }
 
   # Setup Apache http server
-  include apache
+  class { '::apache':
+    default_mods        => false,
+    default_confd_files => false,
+  }
 
   # Setup Icinga server
   file {
     $icinga::params::configIdoDbConf:
       ensure  => present,
-      mode    => '0644',
+      mode    => '0660',
       owner   => root,
       group   => root,
       path    => $icinga::params::configIdoDbConf,
@@ -93,7 +96,7 @@ class icinga::config {
 
     $icinga::params::configIdoModConf:
       ensure  => present,
-      mode    => '0644',
+      mode    => '0664',
       owner   => root,
       group   => root,
       path    => $icinga::params::configIdoModConf,
