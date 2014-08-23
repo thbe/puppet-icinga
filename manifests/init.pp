@@ -40,9 +40,9 @@ class icinga (
   ) inherits icinga::params {
 
   # Require class yum to have the relevant repositories in place
-  include yum
-  include yum::config::epel
-  include yum::config::icinga
+  class { '::yum':
+    repoIcinga => "yes",
+  }
 
   # Start workflow
   if $icinga::params::linux {
