@@ -77,12 +77,6 @@ class icinga::config {
     unless => 'test -f /etc/sysconfig/mysqldb_icinga && test -f /etc/sysconfig/mysqldb_icinga_web'
   }
 
-  # Setup Apache http server
-  class { '::apache':
-    default_mods        => false,
-    default_confd_files => false,
-  }
-
   # Setup Icinga server
   file {
     $icinga::params::configIdoDbConf:

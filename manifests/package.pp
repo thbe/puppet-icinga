@@ -13,6 +13,7 @@
 class icinga::package {
   package { $icinga::params::packageCommon: ensure => installed; }
   package { $icinga::params::packageCommonWeb: ensure => installed; }
+  package { $icinga::params::packageApache: ensure => installed; }
   package { $icinga::params::packageIdoMysql: ensure => installed; }
   package { $icinga::params::packageIdoutilsMysql: ensure => installed; }
   package { $icinga::params::packagePlugins: ensure => installed; }

@@ -13,9 +13,15 @@
 class icinga::service {
 
   # Icinga service configuration
-  service { $icinga::params::serviceCommon:
-    ensure  => 'running',
-    enable  => true,
-    require => Package[$icinga::params::packageCommon];
+  service {
+    $icinga::params::serviceCommon:
+      ensure  => 'running',
+      enable  => true,
+      require => Package[$icinga::params::packageCommon];
+
+    $icinga::params::serviceApache:
+      ensure  => 'running',
+      enable  => true,
+      require => Package[$icinga::params::packageApache];
   }
 }

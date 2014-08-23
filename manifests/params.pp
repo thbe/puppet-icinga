@@ -20,6 +20,7 @@ class icinga::params {
       # Package definition
       $packageCommon           = 'icinga2'
       $packageCommonWeb        = 'icinga-web'
+      $packageApache           = 'httpd'
       $packageIdoMysql         = 'icinga2-ido-mysql'
       $packageIdoutilsMysql    = 'icinga-idoutils-libdbi-mysql'
       $packagePlugins          = 'nagios-plugins'
@@ -32,9 +33,10 @@ class icinga::params {
       $configIdoModTemplate    = 'icinga/etc/idomod.cfg.erb'
       $configSchemaScript      = '/etc/icinga/populate_icinga_schema.sh'
       $configSchemaScriptFile  = 'puppet:///modules/icinga/schema/populate_icinga_schema.sh'
-      
+
       # Service definition
       $serviceCommon           = 'icinga2'
+      $serviceApache           = 'httpd'
     }
     default  : {
       $linux = false
