@@ -1,0 +1,116 @@
+# Class: icinga::config
+#
+# This module contain the configuration for Icinga
+#
+# Parameters:   This module has no parameters
+#
+# Actions:      This module has no actions
+#
+# Requires:     This module has no requirements
+#
+# Sample Usage: include icinga::config
+#
+class icinga::config {
+
+  # Setup mysql databases
+  class { 'mysql::server':
+    old_root_password => '',
+    root_password     => '0nly4install',
+    override_options  => { 'mysqld' => { 'max_connections' => '1024' } },
+    databases => {
+      'icinga' => {
+        ensure  => present,
+        charset => 'utf8',
+      },
+      'icinga_web' => {
+        ensure  => present,
+        charset => 'utf8',
+      },
+    },
+    grants => {
+      'icinga@localhost/icinga.*' => {
+        ensure     => present,
+        options    => [ 'GRANT' ],
+        privileges => [ 'CREATE', 'CREATE VIEW', 'INDEX', 'SELECT', 'INSERT', 'UPDATE', 'DELETE', 'DROP', 'EXECUTE' ],
+        table      => 'icinga.*',
+        user       => 'icinga@localhost',
+      },
+      'icinga_web@localhost/icinga_web.*' => {
+        ensure     => present,
+        options    => [ 'GRANT' ],
+        privileges => [ 'CREATE', 'CREATE VIEW', 'INDEX', 'SELECT', 'INSERT', 'UPDATE', 'DELETE', 'DROP', 'EXECUTE' ],
+        table      => 'icinga_web.*',
+        user       => 'icinga_web@localhost',
+      },
+    },
+    users => {
+      'icinga@localhost' => {
+        ensure                   => 'present',
+        max_connections_per_hour => '0',
+        max_queries_per_hour     => '0',
+        max_updates_per_hour     => '0',
+        max_user_connections     => '0',
+        password_hash            => '*F7EA22C777E1A8D2E1F61A2F9EBBD74FF489FF63',
+      },
+      'icinga_web@localhost' => {
+        ensure                   => 'present',
+        max_connections_per_hour => '0',
+        max_queries_per_hour     => '0',
+        max_updates_per_hour     => '0',
+        max_user_connections     => '0',
+        password_hash            => '*B653CD49D5A5CECE83D6A9DCF28B32DC06F9830F',
+      },
+    },
+  }
+
+  class { 'mysql::server::backup':
+    backupdir      => '/srv/mysql',
+    backuppassword => '0nly4install',
+    backupuser     => 'bckadm',
+  }
+
+  include mysql::server::account_security
+  include mysql::server::mysqltuner
+
+  exec { '/etc/icinga/populate_icinga_schema.sh':
+    path   => '/bin:/sbin:/usr/bin:/usr/sbin',
+    onlyif => 'test -x /etc/icinga/populate_icinga_schema.sh',
+    unless => 'test -f /etc/sysconfig/mysqldb_icinga && test -f /etc/sysconfig/mysqldb_icinga_web'
+  }
+
+  # Setup Apache http server
+  include apache
+
+  # Setup Icinga server
+  file {
+    $icinga::params::configIdoDbConf:
+      ensure  => present,
+      mode    => '0644',
+      owner   => root,
+      group   => root,
+      path    => $icinga::params::configIdoDbConf,
+      content => template($icinga::params::configIdoDbConfTemplate),
+      require => Package[$icinga::params::packageIdoutilsMysql];
+
+    $icinga::params::configIdoModConf:
+      ensure  => present,
+      mode    => '0644',
+      owner   => root,
+      group   => root,
+      path    => $icinga::params::configIdoModConf,
+      content => template($icinga::params::configIdoModTemplate),
+      require => Package[$icinga::params::packageIdoutilsMysql];
+
+    $icinga::params::configSchemaScript:
+      ensure  => present,
+      mode    => '0755',
+      owner   => root,
+      group   => root,
+      path    => $icinga::params::configSchemaScript,
+      source  => $icinga::params::configSchemaScriptFile,
+      require => Package[$icinga::params::packageCommon];
+  }
+
+  # Include Icinga configurations
+  # t.b.d.
+}
