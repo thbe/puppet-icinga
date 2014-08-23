@@ -13,10 +13,9 @@
 class icinga::config {
 
   # Setup mysql databases
-  class { 'mysql::server':
-    old_root_password => '',
-    root_password     => '0nly4install',
-    override_options  => { 'mysqld' => { 'max_connections' => '1024' } },
+  class { '::mysql::server':
+    root_password    => '0nly4install',
+    override_options => { 'mysqld' => { 'max_connections' => '1024' } },
     databases => {
       'icinga' => {
         ensure  => present,
