@@ -25,6 +25,15 @@ class icinga::params {
       $packageIdoutilsMysql    = 'icinga-idoutils-libdbi-mysql'
       $packagePlugins          = 'nagios-plugins'
       $packagePluginsAll       = 'nagios-plugins-all'
+      $packagePhpCommon        = 'php'
+      $packagePhpMysql         = 'php-mysql'
+      $packagePhpLdap          = 'php-ldap'
+      $packagePhpGd            = 'php-gd'
+
+      #gd gd-devel openssl-devel
+      #libdbi libdbi-dbd-mysql libdbi-devel libdbi-drivers
+      #libjpeg libjpeg-devel libpng libpng-devel
+      #net-snmp net-snmp-devel net-snmp-utils perl-Net-SNMP perl-Config-IniFiles nagios-plugins-perl
 
       # Config definition
       $configIdoDbConf         = '/etc/icinga/ido2db.cfg'
