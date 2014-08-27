@@ -25,4 +25,9 @@ class icinga::package {
   package { $icinga::params::packagePhpGd: ensure => installed; }
   package { $icinga::params::packageNetSnmp: ensure => installed; }
   package { $icinga::params::packageNetSnmpDevel: ensure => installed; }
+  package { $icinga::params::packageNetSnmpUtils: ensure => installed; }
+  package { $icinga::params::packageRrdTool: ensure => installed; }
+  package { $icinga::params::packageRrdToolPerl: ensure => installed; }
+  package { $icinga::params::packagePnp4Nagios: ensure => installed; }
+  package { $icinga::params::packageIcingaWebPnp: ensure => installed; }
 }

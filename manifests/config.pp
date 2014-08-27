@@ -79,6 +79,15 @@ class icinga::config {
 
   # Setup Icinga server
   file {
+    $icinga::params::configIcingaConf:
+      ensure  => present,
+      mode    => '0660',
+      owner   => root,
+      group   => root,
+      path    => $icinga::params::configIcingaConf,
+      content => template($icinga::params::configIcingaConfTemplate),
+      require => Package[$icinga::params::packageCommon];
+
     $icinga::params::configIdoDbConf:
       ensure  => present,
       mode    => '0660',
@@ -105,8 +114,32 @@ class icinga::config {
       path    => $icinga::params::configSchemaScript,
       source  => $icinga::params::configSchemaScriptFile,
       require => Package[$icinga::params::packageCommon];
-  }
 
-  # Include Icinga configurations
-  # t.b.d.
+    $icinga::params::configP4NConfig:
+      ensure  => present,
+      mode    => '0755',
+      owner   => root,
+      group   => root,
+      path    => $icinga::params::configP4NConfig,
+      source  => $icinga::params::configP4NConfigTemplate,
+      require => Package[$icinga::params::packagePnp4Nagios];
+
+    $icinga::params::configP4NPerfdata:
+      ensure  => present,
+      mode    => '0755',
+      owner   => root,
+      group   => root,
+      path    => $icinga::params::configP4NPerfdata,
+      source  => $icinga::params::configP4NPerfdataTemplate,
+      require => Package[$icinga::params::packagePnp4Nagios];
+
+    $icinga::params::configP4NHttp:
+      ensure  => present,
+      mode    => '0755',
+      owner   => root,
+      group   => root,
+      path    => $icinga::params::configP4NHttp,
+      source  => $icinga::params::configP4NHttpTemplate,
+      require => Package[$icinga::params::packageApache];
+  }
 }

@@ -37,6 +37,7 @@
 #
 class icinga (
   $plugins = $icinga::params::plugins,
+  $exportedRessources = $icinga::params::exportedRessources,
   ) inherits icinga::params {
 
   # Require class yum to have the relevant repositories in place
