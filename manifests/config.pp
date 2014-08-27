@@ -81,7 +81,7 @@ class icinga::config {
   file {
     $icinga::params::configIcingaConf:
       ensure  => present,
-      mode    => '0660',
+      mode    => '0664',
       owner   => root,
       group   => root,
       path    => $icinga::params::configIcingaConf,
@@ -117,7 +117,7 @@ class icinga::config {
 
     $icinga::params::configP4NPerfdata:
       ensure  => present,
-      mode    => '0644',
+      mode    => '0640',
       owner   => root,
       group   => root,
       path    => $icinga::params::configP4NPerfdata,
