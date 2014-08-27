@@ -142,4 +142,10 @@ class icinga::config {
       source  => $icinga::params::configSchemaScriptFile,
       require => Package[$icinga::params::packageCommon];
   }
+
+  # Setup password file for pnp4nagios
+  exec { '/usr/bin/htpasswd -bc /etc/icinga/passwd root password':
+    path   => '/bin:/sbin:/usr/bin:/usr/sbin',
+    unless => 'test -f /etc/icinga/passwd'
+  }
 }
