@@ -1,12 +1,10 @@
-# Class: icinga::package
+# Class: icinga::package::server
 #
 # This class contain the service configuration for Icinga
 #
 # Parameters:   This class has no parameters
 #
 class icinga::package {
-
-  # Common packages
   package { $icinga::params::packageCommon: ensure => installed; }
   package { $icinga::params::packageCommonWeb: ensure => installed; }
   package { $icinga::params::packageApache: ensure => installed; }
@@ -26,12 +24,4 @@ class icinga::package {
   package { $icinga::params::packageRrdToolPerl: ensure => installed; }
   package { $icinga::params::packagePnp4Nagios: ensure => installed; }
   package { $icinga::params::packageIcingaWebPnp: ensure => installed; }
-
-  if $icinga::client {
-    #include icinga::package::client
-  }
-
-  if $icinga::server {
-    include icinga::package::server
-  }
 }

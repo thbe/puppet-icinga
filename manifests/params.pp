@@ -1,14 +1,8 @@
 # Class: icinga::params
 #
-# This module contain the parameters for Icinga
+# This class contain the parameters for Icinga
 #
-# Parameters:   This module has no parameters
-#
-# Actions:      This module has no actions
-#
-# Requires:     This module has no requirements
-#
-# Sample Usage: include icinga::params
+# Parameters: This class has no parameters
 #
 class icinga::params {
 
@@ -64,6 +58,8 @@ class icinga::params {
   }
 
   # Icinga 2 definitions
-  $plugins            = ['all']
-  $exportedRessources = 'no'
+  $client             = false
+  $server             = false
+  $plugins            = ['none']
+  $exportedResources  = false
 }

@@ -1,27 +1,16 @@
 # Class: icinga::service
 #
-# This module contain the service configuration for Icinga
+# This class contain the service configuration for Icinga
 #
-# Parameters:   This module has no parameters
-#
-# Actions:      This module has no actions
-#
-# Requires:     This module has no requirements
-#
-# Sample Usage: include icinga::service
+# Parameters:   This class has no parameters
 #
 class icinga::service {
 
-  # Icinga service configuration
-  service {
-    $icinga::params::serviceCommon:
-      ensure  => 'running',
-      enable  => true,
-      require => Package[$icinga::params::packageCommon];
+  if $icinga::client {
+    #include icinga::service::client
+  }
 
-    $icinga::params::serviceApache:
-      ensure  => 'running',
-      enable  => true,
-      require => Package[$icinga::params::packageApache];
+  if $icinga::server {
+    include icinga::service::server
   }
 }

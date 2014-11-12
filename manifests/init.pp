@@ -1,29 +1,36 @@
 # == Class: icinga
 #
-# Full description of class icinga here.
+# This is the icinga module. This module install all things
+# required to setup icinga.
 #
 # === Parameters
 #
-# Document parameters here.
+# Here is the list of parameters used by this module.
+#
+# [*client*]
+#   Specify if client components should be installed (not implemented yet)
+#   Default value is false
+#
+# [*server*]
+#   Specify if server components should be installed
+#   Default value is false
 #
 # [*plugins*]
 #   Specify one or more plugins that should be installed
-#   Default value is all
+#   Default value is none
+#
+# [*exportedRessources*]
+#   Specify if exported resources should be used
+#   Default value is false
 #
 # === Variables
 #
-# Here you should define a list of variables that this module would require.
-#
-# [*sample_variable*]
-#   Explanation of how this variable affects the funtion of this class and if
-#   it has a default. e.g. "The parameter enc_ntp_servers must be set by the
-#   External Node Classifier as a comma separated list of hostnames." (Note,
-#   global variables should be avoided in favor of class parameters as
-#   of Puppet 2.6.)
+# No additonal variables are required for this module
 #
 # === Examples
 #
-#  class { icinga:
+#  class { '::icinga':
+#    client  => true,
 #    plugins => [ 'http', 'ssh' ],
 #  }
 #
@@ -36,8 +43,10 @@
 # Copyright 2014 Thomas Bendler, unless otherwise noted.
 #
 class icinga (
-  $plugins = $icinga::params::plugins,
-  $exportedRessources = $icinga::params::exportedRessources,
+  $client            = $icinga::params::client,
+  $server            = $icinga::params::server,
+  $plugins           = $icinga::params::plugins,
+  $exportedResources = $icinga::params::exportedResources,
   ) inherits icinga::params {
 
   # Require class yum to have the relevant repositories in place
@@ -47,14 +56,19 @@ class icinga (
 
   # Start workflow
   if $icinga::params::linux {
-    # Containment
-    contain icinga::package
-    contain icinga::config
-    contain icinga::service
+    if $client {
+      # t.b.d.
+    }
+    if $server {
+      # Containment
+      contain icinga::package
+      contain icinga::config
+      contain icinga::service
 
-    # Include classes
-    Class['icinga::package'] ->
-    Class['icinga::config'] ->
-    Class['icinga::service']
+      # Include classes
+      Class['icinga::package'] ->
+      Class['icinga::config'] ->
+      Class['icinga::service']
+    }
   }
 }
