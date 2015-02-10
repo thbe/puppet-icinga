@@ -56,19 +56,14 @@ class icinga (
 
   # Start workflow
   if $icinga::params::linux {
-    if $client {
-      # t.b.d.
-    }
-    if $server {
-      # Containment
-      contain icinga::package
-      contain icinga::config
-      contain icinga::service
+    # Containment
+    contain icinga::package
+    contain icinga::config
+    contain icinga::service
 
-      # Include classes
-      Class['icinga::package'] ->
-      Class['icinga::config'] ->
-      Class['icinga::service']
-    }
+    # Include classes
+    Class['icinga::package'] ->
+    Class['icinga::config'] ->
+    Class['icinga::service']
   }
 }
