@@ -1,6 +1,6 @@
 {
   "name": "thbe-icinga",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "author": "thbe",
   "summary": "Install an Icinga instance",
   "license": "GPL-3.0",

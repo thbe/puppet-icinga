@@ -4,7 +4,10 @@
 #
 # Parameters:   This class has no parameters
 #
-class icinga::package {
+class icinga::package::server {
+
+  # Server relevant packages
+
   package { $icinga::params::packageCommon: ensure => installed; }
 
   package { $icinga::params::packageCommonWeb: ensure => installed; }
