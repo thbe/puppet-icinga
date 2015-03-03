@@ -7,7 +7,7 @@
 class icinga::service {
 
   if $icinga::client {
-    #include icinga::service::client
+    include icinga::service::client
   }
 
   if $icinga::server {
