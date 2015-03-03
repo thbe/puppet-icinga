@@ -9,7 +9,7 @@ class icinga::params {
   # Operating system specific definitions
   case $::osfamily {
     'RedHat' : {
-      $linux = true
+      $linux                        = true
 
       # Package definition
       $packageCommon                = 'icinga2'
@@ -56,10 +56,11 @@ class icinga::params {
 
       # Service definition
       $serviceCommon                = 'icinga2'
+      $serviceNrpe                  = 'nrpe'
       $serviceApache                = 'httpd'
     }
     default  : {
-      $linux = false
+      $linux                        = false
     }
   }
 
