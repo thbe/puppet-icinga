@@ -46,12 +46,12 @@ class icinga::params {
       $configP4NPerfdataTemplate    = 'icinga/etc/pnp4nagios/process_perfdata.cfg.erb'
       $configP4NHttp                = '/etc/httpd/conf.d/pnp4nagios.conf'
       $configP4NHttpTemplate        = 'icinga/etc/httpd/conf.d/pnp4nagios.conf.erb'
+      $configNrpeConfig             = '/etc/nagios/nrpe.cfg'
+      $configNrpeConfigTemplate     = 'icinga/etc/nagios/nrpe.cfg.erb'
+      $configNrpeConfigBase         = '/etc/nrpe.d/base.cfg'
+      $configNrpeConfigBaseTemplate = 'icinga/etc/nrpe.d/base.cfg.erb'
       $configSchemaScript           = '/etc/icinga/populate_icinga_schema.sh'
       $configSchemaScriptFile       = 'puppet:///modules/icinga/schema/populate_icinga_schema.sh'
-      $configNrpeConfig             = '/etc/nagios/nrpe.cfg'
-      $configNrpeConfigTemplate     = 'nagios/etc/nagios/nrpe.cfg.erb'
-      $configNrpeConfigBase         = '/etc/nrpe.d/base.cfg'
-      $configNrpeConfigBaseTemplate = 'nagios/etc/nrpe.d/base.cfg.erb'
 
       # Service definition
       $serviceCommon                = 'icinga2'
