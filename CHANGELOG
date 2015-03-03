@@ -9,3 +9,9 @@
 
 0.3.1 2015-02-10 thbe <project@bendler-net.de>
  * Increase forge score
+
+0.3.2 2015-03-03 thbe <project@bendler-net.de>
+ * Split server client installation
+
+0.4.0 2015-03-03 thbe <project@bendler-net.de>
+ * Add client configuration

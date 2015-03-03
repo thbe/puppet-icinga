@@ -18,12 +18,6 @@ class icinga::package::server {
 
   package { $icinga::params::packageIdoutilsMysql: ensure => installed; }
 
-  package { $icinga::params::packagePlugins: ensure => installed; }
-
-  package { $icinga::params::packagePluginsPerl: ensure => installed; }
-
-  package { $icinga::params::packagePluginsAll: ensure => installed; }
-
   package { $icinga::params::packagePhpCommon: ensure => installed; }
 
   package { $icinga::params::packagePhpMysql: ensure => installed; }

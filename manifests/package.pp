@@ -10,6 +10,10 @@ class icinga::package {
 
   package { $icinga::params::packagePlugins: ensure => installed; }
 
+  package { $icinga::params::packagePluginsPerl: ensure => installed; }
+
+  package { $icinga::params::packagePluginsAll: ensure => installed; }
+
   if $icinga::client {
     #include icinga::package::client
   }
