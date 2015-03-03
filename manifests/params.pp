@@ -68,4 +68,5 @@ class icinga::params {
   $server             = false
   $plugins            = ['none']
   $exportedResources  = false
+  $serverAcl          = '127.0.0.1'
 }

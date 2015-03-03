@@ -23,6 +23,10 @@
 #   Specify if exported resources should be used
 #   Default value is false (not implemented yet)
 #
+# [*serverAcl*]
+#   Specify the Icinga servers that are allowed to access NRPE
+#   Default value is 127.0.0.1
+#
 # === Variables
 #
 # No additonal variables are required for this module
@@ -47,6 +51,7 @@ class icinga (
   $server            = $icinga::params::server,
   $plugins           = $icinga::params::plugins,
   $exportedResources = $icinga::params::exportedResources,
+  $serverAcl         = $icinga::params::serverAcl,
   ) inherits icinga::params {
 
   # Require class yum to have the relevant repositories in place
