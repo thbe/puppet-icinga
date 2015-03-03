@@ -6,7 +6,7 @@
 #
 class icinga::config {
   if $icinga::client {
-    #include icinga::config::client
+    include icinga::config::client
   }
 
   if $icinga::server {

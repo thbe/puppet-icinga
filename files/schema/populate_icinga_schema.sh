@@ -12,7 +12,7 @@ MYSQL_USER="root"
 MYSQL_PASSWORD=${1:-0nly4install}
 
 # Define schema
-SCHEMA_IDO=$(ls -1 /usr/share/doc/icinga2-ido-mysql-*/schema/mysql.sql)
+SCHEMA_IDO=$(ls -1 /usr/share/icinga2-ido-mysql/schema/mysql.sql)
 SCHEMA_WEB=$(ls -1 /usr/share/doc/icinga-web-*/schema/mysql.sql)
 
 # Populate icinga ido schema and write status to sysconfig

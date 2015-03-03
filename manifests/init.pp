@@ -17,11 +17,11 @@
 #
 # [*plugins*]
 #   Specify one or more plugins that should be installed
-#   Default value is none
+#   Default value is none (not implemented yet)
 #
 # [*exportedRessources*]
 #   Specify if exported resources should be used
-#   Default value is false
+#   Default value is false (not implemented yet)
 #
 # === Variables
 #
@@ -40,7 +40,7 @@
 #
 # === Copyright
 #
-# Copyright 2014 Thomas Bendler, unless otherwise noted.
+# Copyright 2015 Thomas Bendler, unless otherwise noted.
 #
 class icinga (
   $client            = $icinga::params::client,

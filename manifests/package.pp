@@ -15,7 +15,7 @@ class icinga::package {
   package { $icinga::params::packagePluginsAll: ensure => installed; }
 
   if $icinga::client {
-    #include icinga::package::client
+    include icinga::package::client
   }
 
   if $icinga::server {

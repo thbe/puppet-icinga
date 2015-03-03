@@ -48,7 +48,6 @@ class icinga::params {
       $configP4NHttpTemplate        = 'icinga/etc/httpd/conf.d/pnp4nagios.conf.erb'
       $configSchemaScript           = '/etc/icinga/populate_icinga_schema.sh'
       $configSchemaScriptFile       = 'puppet:///modules/icinga/schema/populate_icinga_schema.sh'
-      $configNrpeConfigDirectory    = '/etc/nrpe.d'
       $configNrpeConfig             = '/etc/nagios/nrpe.cfg'
       $configNrpeConfigTemplate     = 'nagios/etc/nagios/nrpe.cfg.erb'
       $configNrpeConfigBase         = '/etc/nrpe.d/base.cfg'
