@@ -139,7 +139,20 @@ class icinga::config::server {
 
   # Include exported ressources if enabled
   if $icinga::exportedResources {
-    # to be done
+    file {
+      $icinga::params::configPuppetRessourceDirectory:
+        ensure  => directory,
+        mode    => '0755',
+        owner   => root,
+        group   => root,
+        require => Package[$icinga::params::packageCommon];
+    }
+
+    Nagios_host         <<| |>> { notify => Service[$icinga::params::serviceCommon] }
+    Nagios_hostextinfo  <<| |>> { notify => Service[$icinga::params::serviceCommon] }
+    Nagios_hostgroup    <<| |>> { notify => Service[$icinga::params::serviceCommon] }
+    Nagios_service      <<| |>> { notify => Service[$icinga::params::serviceCommon] }
+    Nagios_servicegroup <<| |>> { notify => Service[$icinga::params::serviceCommon] }
   }
 
   # Setup password file for pnp4nagios

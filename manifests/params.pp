@@ -13,7 +13,7 @@ class icinga::params {
 
       # Package definition
       $packageCommon                = 'icinga2'
-      $packageCommonWeb             = 'icinga-web'
+      $packageCommonWeb             = 'icingaweb2'
       $packageNrpe                  = 'nrpe'
       $packageApache                = 'httpd'
       $packageIdoMysql              = 'icinga2-ido-mysql'
@@ -34,32 +34,33 @@ class icinga::params {
       $packageIcingaWebPnp          = 'icinga-web-module-pnp'
 
       # Config definition
-      $configIcingaConf             = '/etc/icinga/icinga.cfg'
-      $configIcingaConfTemplate     = 'icinga/etc/icinga/icinga.cfg.erb'
-      $configIdoDbConf              = '/etc/icinga/ido2db.cfg'
-      $configIdoDbConfTemplate      = 'icinga/etc/icinga/ido2db.cfg.erb'
-      $configIdoModConf             = '/etc/icinga/idomod.cfg'
-      $configIdoModTemplate         = 'icinga/etc/icinga/idomod.cfg.erb'
-      $configP4NConfig              = '/etc/pnp4nagios/config.php'
-      $configP4NConfigTemplate      = 'icinga/etc/pnp4nagios/config.php.erb'
-      $configP4NPerfdata            = '/etc/pnp4nagios/process_perfdata.cfg'
-      $configP4NPerfdataTemplate    = 'icinga/etc/pnp4nagios/process_perfdata.cfg.erb'
-      $configP4NHttp                = '/etc/httpd/conf.d/pnp4nagios.conf'
-      $configP4NHttpTemplate        = 'icinga/etc/httpd/conf.d/pnp4nagios.conf.erb'
-      $configNrpeConfig             = '/etc/nagios/nrpe.cfg'
-      $configNrpeConfigTemplate     = 'icinga/etc/nagios/nrpe.cfg.erb'
-      $configNrpeConfigBase         = '/etc/nrpe.d/base.cfg'
-      $configNrpeConfigBaseTemplate = 'icinga/etc/nrpe.d/base.cfg.erb'
-      $configSchemaScript           = '/etc/icinga/populate_icinga_schema.sh'
-      $configSchemaScriptFile       = 'puppet:///modules/icinga/schema/populate_icinga_schema.sh'
+      $configIcingaConf               = '/etc/icinga/icinga.cfg'
+      $configIcingaConfTemplate       = 'icinga/etc/icinga/icinga.cfg.erb'
+      $configIdoDbConf                = '/etc/icinga/ido2db.cfg'
+      $configIdoDbConfTemplate        = 'icinga/etc/icinga/ido2db.cfg.erb'
+      $configIdoModConf               = '/etc/icinga/idomod.cfg'
+      $configIdoModTemplate           = 'icinga/etc/icinga/idomod.cfg.erb'
+      $configP4NConfig                = '/etc/pnp4nagios/config.php'
+      $configP4NConfigTemplate        = 'icinga/etc/pnp4nagios/config.php.erb'
+      $configP4NPerfdata              = '/etc/pnp4nagios/process_perfdata.cfg'
+      $configP4NPerfdataTemplate      = 'icinga/etc/pnp4nagios/process_perfdata.cfg.erb'
+      $configP4NHttp                  = '/etc/httpd/conf.d/pnp4nagios.conf'
+      $configP4NHttpTemplate          = 'icinga/etc/httpd/conf.d/pnp4nagios.conf.erb'
+      $configNrpeConfig               = '/etc/nagios/nrpe.cfg'
+      $configNrpeConfigTemplate       = 'icinga/etc/nagios/nrpe.cfg.erb'
+      $configNrpeConfigBase           = '/etc/nrpe.d/base.cfg'
+      $configNrpeConfigBaseTemplate   = 'icinga/etc/nrpe.d/base.cfg.erb'
+      $configPuppetRessourceDirectory = '/etc/icinga/conf.d/puppet'
+      $configSchemaScript             = '/etc/icinga/populate_icinga_schema.sh'
+      $configSchemaScriptFile         = 'puppet:///modules/icinga/schema/populate_icinga_schema.sh'
 
       # Service definition
-      $serviceCommon                = 'icinga2'
-      $serviceNrpe                  = 'nrpe'
-      $serviceApache                = 'httpd'
+      $serviceCommon                  = 'icinga2'
+      $serviceNrpe                    = 'nrpe'
+      $serviceApache                  = 'httpd'
     }
     default  : {
-      $linux                        = false
+      $linux                          = false
     }
   }
 

@@ -37,25 +37,38 @@ stable branch of the Icinga repository.
 
 ### What icinga affects
 
-* Icinga will install MySQL, PHP, Apache plus Icinga itself
+* Icinga will install MySQL, PHP, Apache plus Icinga and Icinga-Web itself
 
 ### Beginning with icinga
 
-The module isn't very complex right now, see the usage section for insructions.
+The module isn't very complex right now, see the usage section for instructions.
 
 ## Usage
 
-Simply include the module and it will install the Icinga instance.
+The module can be used with server or client installation in mind. What kind of
+installation is performed can be controlled with parameters.
+
+### Client
+
+Simply call the module with parameter client enabled:
 
 ```puppet
-include '::icinga'
+class { '::icinga': client  => true }
+```
+
+### Server
+
+Simply call the module with parameter server enabled:
+
+```puppet
+class { '::icinga': server => true }
 ```
 
 ## Reference
 
 ## Limitations
 
-This module has been built on and tested against Puppet 3.4 and higher.
+This module has been built on and tested against Puppet 3.7 and higher.
 
 The module has been tested on:
 
@@ -63,7 +76,7 @@ The module has been tested on:
 * Scientific Linux 6
 * CentOS Linux 6
 
-Testing on other platforms has been light and cannot be guaranteed. 
+Testing on other platforms has been light and cannot be guaranteed.
 
 ##Development
 

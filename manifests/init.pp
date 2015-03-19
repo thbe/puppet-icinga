@@ -54,19 +54,20 @@ class icinga (
   $serverAcl         = $icinga::params::serverAcl,
   ) inherits icinga::params {
 
-  # Require class yum to have the relevant repositories in place
-  class { '::yum':
-    repoIcinga => "yes",
-  }
-
   # Start workflow
   if $icinga::params::linux {
+    # Require class yum to have the relevant repositories in place
+    class { '::yum':
+      repoIcinga => true,
+    }
+
     # Containment
     contain icinga::package
     contain icinga::config
     contain icinga::service
 
     # Include classes
+    Class['::yum'] ->
     Class['icinga::package'] ->
     Class['icinga::config'] ->
     Class['icinga::service']

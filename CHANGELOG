@@ -1,17 +1,21 @@
-0.1.0 2014-08-23 thbe <project@bendler-net.de>
- * Initial release
+0.5.0 2015-03-19 thbe <project@bendler-net.de>
+ * Upgrade module to icingaweb2
+ * Add exported ressources
 
-0.2.0 2014-08-23 thbe <project@bendler-net.de>
- * Passed local test VM
-
-0.3.0 2014-08-27 thbe <project@bendler-net.de>
- * Add pnp4nagios support
-
-0.3.1 2015-02-10 thbe <project@bendler-net.de>
- * Increase forge score
+0.4.0 2015-03-03 thbe <project@bendler-net.de>
+ * Add client configuration
 
 0.3.2 2015-03-03 thbe <project@bendler-net.de>
  * Split server client installation
 
-0.4.0 2015-03-03 thbe <project@bendler-net.de>
- * Add client configuration
+0.3.1 2015-02-10 thbe <project@bendler-net.de>
+ * Increase forge score
+
+0.3.0 2014-08-27 thbe <project@bendler-net.de>
+ * Add pnp4nagios support
+
+0.2.0 2014-08-23 thbe <project@bendler-net.de>
+ * Passed local test VM
+
+0.1.0 2014-08-23 thbe <project@bendler-net.de>
+ * Initial release
