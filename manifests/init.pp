@@ -56,18 +56,16 @@ class icinga (
 
   # Start workflow
   if $icinga::params::linux {
-    # Require class yum to have the relevant repositories in place
-    class { '::yum':
-      repoIcinga => true,
-    }
-
     # Containment
+    contain yum
+    contain yum::config::icinga
     contain icinga::package
     contain icinga::config
     contain icinga::service
 
     # Include classes
     Class['::yum'] ->
+    Class['::yum::config::icinga'] ->
     Class['icinga::package'] ->
     Class['icinga::config'] ->
     Class['icinga::service']

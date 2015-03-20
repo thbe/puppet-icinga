@@ -1,3 +1,6 @@
+0.5.1 2015-03-20 thbe <project@bendler-net.de>
+ * Fix missing contain
+
 0.5.0 2015-03-19 thbe <project@bendler-net.de>
  * Upgrade module to icingaweb2
  * Add exported ressources

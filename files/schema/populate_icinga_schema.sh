@@ -19,7 +19,14 @@ SCHEMA_WEB=$(ls -1 /usr/share/doc/icinga-web-*/schema/mysql.sql)
 if [ ! -f /etc/sysconfig/mysqldb_icinga ]; then
   ${MYSQL_COMMAND} -u ${MYSQL_USER} -p${MYSQL_PASSWORD} icinga < ${SCHEMA_IDO}
   if [ ${?} -eq 0 ]; then
-    echo "database schema created" > /etc/sysconfig/mysqldb_icinga
+    echo "Icinga database schema created" > /etc/sysconfig/mysqldb_icinga
+  else
+    ${MYSQL_COMMAND} -u ${MYSQL_USER} icinga < ${SCHEMA_IDO}
+    if [ ${?} -eq 0 ]; then
+      echo "Icinga database schema created" > /etc/sysconfig/mysqldb_icinga
+    else
+      echo "Can not create Icinga schema"; exit 1
+    fi
   fi
 fi
 
@@ -27,6 +34,13 @@ fi
 if [ ! -f /etc/sysconfig/mysqldb_icinga_web ]; then
   ${MYSQL_COMMAND} -u ${MYSQL_USER} -p${MYSQL_PASSWORD} icinga_web < ${SCHEMA_WEB}
   if [ ${?} -eq 0 ]; then
-    echo "database schema created" > /etc/sysconfig/mysqldb_icinga_web
+    echo "Icinga web database schema created" > /etc/sysconfig/mysqldb_icinga_web
+  else
+    ${MYSQL_COMMAND} -u ${MYSQL_USER} icinga_web < ${SCHEMA_WEB}
+    if [ ${?} -eq 0 ]; then
+      echo "Icinga web database schema created" > /etc/sysconfig/mysqldb_icinga_web
+    else
+      echo "Can not create Icinga web schema"; exit 1
+    fi
   fi
 fi
