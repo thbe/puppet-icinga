@@ -57,15 +57,13 @@ class icinga (
   # Start workflow
   if $icinga::params::linux {
     # Containment
-    contain yum
-    contain yum::config::icinga
+    contain icinga::repository
     contain icinga::package
     contain icinga::config
     contain icinga::service
 
     # Include classes
-    Class['::yum'] ->
-    Class['::yum::config::icinga'] ->
+    Class['icinga::repository'] ->
     Class['icinga::package'] ->
     Class['icinga::config'] ->
     Class['icinga::service']
