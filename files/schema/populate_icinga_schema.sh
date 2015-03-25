@@ -13,7 +13,7 @@ MYSQL_PASSWORD=${1:-0nly4install}
 
 # Define schema
 SCHEMA_IDO=$(ls -1 /usr/share/icinga2-ido-mysql/schema/mysql.sql)
-SCHEMA_WEB=$(ls -1 /usr/share/doc/icinga-web-*/schema/mysql.sql)
+SCHEMA_WEB2=$(ls -1 /usr/share/doc/icingaweb2/schema/mysql.schema.sql)
 
 # Populate icinga ido schema and write status to sysconfig
 if [ ! -f /etc/sysconfig/mysqldb_icinga ]; then
@@ -30,17 +30,17 @@ if [ ! -f /etc/sysconfig/mysqldb_icinga ]; then
   fi
 fi
 
-# Populate icinga web schema and write status to sysconfig
-if [ ! -f /etc/sysconfig/mysqldb_icinga_web ]; then
-  ${MYSQL_COMMAND} -u ${MYSQL_USER} -p${MYSQL_PASSWORD} icinga_web < ${SCHEMA_WEB}
+# Populate icinga web2 schema and write status to sysconfig
+if [ ! -f /etc/sysconfig/mysqldb_icingaweb2 ]; then
+  ${MYSQL_COMMAND} -u ${MYSQL_USER} -p${MYSQL_PASSWORD} icingaweb_db < ${SCHEMA_WEB2}
   if [ ${?} -eq 0 ]; then
-    echo "Icinga web database schema created" > /etc/sysconfig/mysqldb_icinga_web
+    echo "Icinga web2 database schema created" > /etc/sysconfig/mysqldb_icingaweb2
   else
-    ${MYSQL_COMMAND} -u ${MYSQL_USER} icinga_web < ${SCHEMA_WEB}
+    ${MYSQL_COMMAND} -u ${MYSQL_USER} icingaweb_db < ${SCHEMA_WEB2}
     if [ ${?} -eq 0 ]; then
-      echo "Icinga web database schema created" > /etc/sysconfig/mysqldb_icinga_web
+      echo "Icinga web2 database schema created" > /etc/sysconfig/mysqldb_icingaweb2
     else
-      echo "Can not create Icinga web schema"; exit 1
+      echo "Can not create Icinga web2 schema"; exit 1
     fi
   fi
 fi

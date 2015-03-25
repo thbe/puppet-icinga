@@ -15,7 +15,7 @@ class icinga::config::server {
         ensure  => present,
         charset => 'utf8',
       },
-      'icinga_web' => {
+      'icingaweb_db' => {
         ensure  => present,
         charset => 'utf8',
       },
@@ -28,12 +28,12 @@ class icinga::config::server {
         table      => 'icinga.*',
         user       => 'icinga@localhost',
       },
-      'icinga_web@localhost/icinga_web.*' => {
+      'icingaweb_db@localhost/icingaweb_db.*' => {
         ensure     => present,
         options    => [ 'GRANT' ],
         privileges => [ 'CREATE', 'CREATE VIEW', 'INDEX', 'SELECT', 'INSERT', 'UPDATE', 'DELETE', 'DROP', 'EXECUTE' ],
-        table      => 'icinga_web.*',
-        user       => 'icinga_web@localhost',
+        table      => 'icingaweb_db.*',
+        user       => 'icingaweb_db@localhost',
       },
     },
     users => {
@@ -45,13 +45,13 @@ class icinga::config::server {
         max_user_connections     => '0',
         password_hash            => '*F7EA22C777E1A8D2E1F61A2F9EBBD74FF489FF63',
       },
-      'icinga_web@localhost' => {
+      'icingaweb_db@localhost' => {
         ensure                   => 'present',
         max_connections_per_hour => '0',
         max_queries_per_hour     => '0',
         max_updates_per_hour     => '0',
         max_user_connections     => '0',
-        password_hash            => '*B653CD49D5A5CECE83D6A9DCF28B32DC06F9830F',
+        password_hash            => '*A59B3BA4A8D3C199B42C671AD1D4B8E7AD50A325',
       },
     },
   }
@@ -73,32 +73,54 @@ class icinga::config::server {
 
   # Setup Icinga server
   file {
-    $icinga::params::configIcingaConf:
-      ensure  => present,
-      mode    => '0664',
-      owner   => root,
-      group   => root,
-      path    => $icinga::params::configIcingaConf,
-      content => template($icinga::params::configIcingaConfTemplate),
-      require => Package[$icinga::params::packageCommon];
-
-    $icinga::params::configIdoDbConf:
+    $icinga::params::configIcinga2IdoMysql:
       ensure  => present,
       mode    => '0660',
       owner   => root,
       group   => root,
-      path    => $icinga::params::configIdoDbConf,
-      content => template($icinga::params::configIdoDbConfTemplate),
-      require => Package[$icinga::params::packageIdoutilsMysql];
+      path    => $icinga::params::configIcinga2IdoMysql,
+      content => template($icinga::params::configIcinga2IdoMysqlTemplate),
+      require => Package[$icinga::params::packageIdoMysql];
 
-    $icinga::params::configIdoModConf:
-      ensure  => present,
-      mode    => '0664',
-      owner   => root,
-      group   => root,
-      path    => $icinga::params::configIdoModConf,
-      content => template($icinga::params::configIdoModTemplate),
-      require => Package[$icinga::params::packageIdoutilsMysql];
+    $icinga::params::configIcinga2LinkChecker:
+      ensure  => link,
+      mode    => '0775',
+      owner   => icinga,
+      group   => icinga,
+      path    => $icinga::params::configIcinga2FeatureChecker,
+      require => Package[$icinga::params::packageCommon];
+
+    $icinga::params::configIcinga2LinkIdoMysql:
+      ensure  => link,
+      mode    => '0775',
+      owner   => icinga,
+      group   => icinga,
+      path    => $icinga::params::configIcinga2FeatureIdoMysql,
+      require => Package[$icinga::params::packageCommon];
+
+    $icinga::params::configIcinga2LinkMainlog:
+      ensure  => link,
+      mode    => '0775',
+      owner   => icinga,
+      group   => icinga,
+      path    => $icinga::params::configIcinga2FeatureMainlog,
+      require => Package[$icinga::params::packageCommon];
+
+    $icinga::params::configIcinga2LinkNotification:
+      ensure  => link,
+      mode    => '0775',
+      owner   => icinga,
+      group   => icinga,
+      path    => $icinga::params::configIcinga2FeatureNotification,
+      require => Package[$icinga::params::packageCommon];
+
+    $icinga::params::configIcinga2LinkPerfdata:
+      ensure  => link,
+      mode    => '0775',
+      owner   => icinga,
+      group   => icinga,
+      path    => $icinga::params::configIcinga2FeaturePerfdata,
+      require => Package[$icinga::params::packageCommon];
 
     $icinga::params::configP4NConfig:
       ensure  => present,

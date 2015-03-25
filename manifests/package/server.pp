@@ -10,6 +10,8 @@ class icinga::package::server {
 
   package { $icinga::params::packageCommon: ensure => installed; }
 
+  package { $icinga::params::packageCommonCli: ensure => installed; }
+
   package { $icinga::params::packageCommonWeb: ensure => installed; }
 
   package { $icinga::params::packageApache: ensure => installed; }

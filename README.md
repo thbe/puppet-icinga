@@ -13,31 +13,33 @@
 5. [Limitations - OS compatibility, etc.](#limitations)
 6. [Development - Guide for contributing to the module](#development)
 
+
 ## Overview
 
-This module install an Icinga 2 instance with the current web interface.
+This module install an Icinga 2 instance with the new Incinga 2 web interface.
+
 
 ## Module Description
 
-This modules install an instance of Icinga 2 with the current web interface. It
+This module install an Icinga 2 instance with the new Incinga 2 web interface. It
 let you define resources that the instance should monitor.
 
-The module does not use stored procedures. The reason is quite simple, in a
+The usage of stored procedures is optional. The reason is quite simple, in a
 perfect world, all resources in a network are managed with Puppet. In a real
 world, there are a lot of resources like switches, routers, printers that can't
 be managed with Puppet and other resources that aren't managed by Puppet
 because of whatever reasons. So you have to define monitoring resources anyway
 beside of stored procedures. Mixing manually defined resources and resources
-from stored procedures is not really predictable and therefor error-prone.
+from stored procedures is not really predictable and therefor error-prone. So
+stored procedures are disabled by default and you should only acitvate them if
+you know how this can influence the stability of you Icinga 2 instance.
 
-The new web interface will be integrated an set as default once it is in the
-stable branch of the Icinga repository.
 
 ## Setup
 
 ### What icinga affects
 
-* Icinga will install MySQL, PHP, Apache plus Icinga and Icinga-Web itself
+* Icinga will install MySQL, PHP, Apache, Icinga2 and Icingaweb2
 
 ### Beginning with icinga
 
@@ -77,6 +79,8 @@ The module has been tested on:
 * CentOS Linux 6
 
 Testing on other platforms has been light and cannot be guaranteed.
+
+The documentation isn't feature complete yet and not all functions are documented.
 
 ##Development
 
