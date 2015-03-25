@@ -10,6 +10,9 @@ class icinga::config {
   }
 
   if $icinga::server {
+    include icinga::config::mysql
     include icinga::config::server
+    include icinga::config::web2
+    include icinga::config::pnp4nagios
   }
 }
