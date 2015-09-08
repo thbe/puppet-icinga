@@ -1,19 +1,15 @@
 # == Class: icinga
 #
 # This is the icinga module. This module install all things
-# required to setup icinga.
+# required to setup Icinga 2.
 #
 # === Parameters
 #
 # Here is the list of parameters used by this module.
 #
-# [*client*]
-#   Specify if client components should be installed (not implemented yet)
-#   Default value is false
-#
-# [*server*]
-#   Specify if server components should be installed
-#   Default value is false
+# [*type*]
+#   Specify if client or server components should be installed
+#   Default value is client
 #
 # [*plugins*]
 #   Specify one or more plugins that should be installed
@@ -34,8 +30,7 @@
 # === Examples
 #
 #  class { '::icinga':
-#    client  => true,
-#    plugins => [ 'http', 'ssh' ],
+#    type => 'client',
 #  }
 #
 # === Authors
@@ -47,11 +42,10 @@
 # Copyright 2015 Thomas Bendler, unless otherwise noted.
 #
 class icinga (
-  $client            = $icinga::params::client,
-  $server            = $icinga::params::server,
-  $plugins           = $icinga::params::plugins,
-  $exportedResources = $icinga::params::exportedResources,
-  $serverAcl         = $icinga::params::serverAcl,
+  $type              = 'client',
+  $plugins           = ['none'],
+  $exportedResources = false,
+  $serverAcl         = '127.0.0.1',
   ) inherits icinga::params {
 
   # Start workflow

@@ -5,11 +5,11 @@
 # Parameters: This class has no parameters
 #
 class icinga::config {
-  if $icinga::client {
+  if $icinga::type == 'client' {
     include icinga::config::client
   }
 
-  if $icinga::server {
+  if $icinga::type == 'server' {
     include icinga::config::mysql
     include icinga::config::server
     include icinga::config::web2

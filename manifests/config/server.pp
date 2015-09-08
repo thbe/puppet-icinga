@@ -46,19 +46,43 @@ class icinga::config::server {
       group   => icinga,
       path    => $icinga::params::configIcinga2FeaturePerfdata,
       require => Package[$icinga::params::packageCommon];
+
+    $icinga::params::configIcinga2ConfDirectoryCustom:
+      ensure  => directory,
+      mode    => '0750',
+      owner   => icinga,
+      group   => icinga,
+      path    => $icinga::params::configIcinga2ConfDirectoryCustom,
+      require => Package[$icinga::params::packageCommon];
+
+    $icinga::params::configIcinga2ConfDirectoryPuppet:
+      ensure  => directory,
+      mode    => '0750',
+      owner   => icinga,
+      group   => icinga,
+      path    => $icinga::params::configIcinga2ConfDirectoryPuppet,
+      require => Package[$icinga::params::packageCommon];
+
+    $icinga::params::configIcinga2ExtensionsDirectoryPuppet:
+      ensure  => directory,
+      mode    => '0750',
+      owner   => icinga,
+      group   => icinga,
+      path    => $icinga::params::configIcinga2ExtensionsDirectoryPuppet,
+      require => Package[$icinga::params::packageCommon];
+
+    $icinga::params::configServiceExtension:
+      ensure  => present,
+      mode    => '0640',
+      owner   => icinga,
+      group   => icinga,
+      path    => $icinga::params::configServiceExtension,
+      source  => $icinga::params::configServiceExtensionFile,
+      require => Package[$icinga::params::packageCommon];
   }
 
   # Include exported ressources if enabled
   if $icinga::exportedResources {
-    file {
-      $icinga::params::configPuppetRessourceDirectory:
-        ensure  => directory,
-        mode    => '0755',
-        owner   => root,
-        group   => root,
-        require => Package[$icinga::params::packageCommon];
-    }
-
     Nagios_host         <<| |>> { notify => Service[$icinga::params::serviceCommon] }
     Nagios_hostextinfo  <<| |>> { notify => Service[$icinga::params::serviceCommon] }
     Nagios_hostgroup    <<| |>> { notify => Service[$icinga::params::serviceCommon] }

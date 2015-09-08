@@ -1,6 +1,6 @@
 # Class: icinga::package::server
 #
-# This class contain the service configuration for Icinga
+# This class contain the packages for Icinga 2 server installation
 #
 # Parameters:   This class has no parameters
 #

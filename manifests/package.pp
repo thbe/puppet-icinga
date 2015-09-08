@@ -6,19 +6,12 @@
 #
 class icinga::package {
 
-  # Common packages
-
-  package { $icinga::params::packagePlugins: ensure => installed; }
-
-  package { $icinga::params::packagePluginsPerl: ensure => installed; }
-
-  package { $icinga::params::packagePluginsAll: ensure => installed; }
-
-  if $icinga::client {
+  if $icinga::type == 'client' {
     include icinga::package::client
   }
 
-  if $icinga::server {
+  if $icinga::type == 'server' {
+    include icinga::package::client
     include icinga::package::server
   }
 }
