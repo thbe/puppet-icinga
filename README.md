@@ -54,7 +54,7 @@ You need to activate the Icinga repository before you can setup the Icinga insta
 If you use a rpm based system from the RedHat family you can use my yum module:
 
 ```puppet
-class { '::yum': repoIcinga => true }
+class { "::yum": repoIcinga => true }
 ```
 
 ### Beginning with icinga
@@ -68,25 +68,49 @@ installation is performed can be controlled with parameters.
 
 ### Client
 
-Simply call the module with parameter client enabled:
+Simply call the module with parameter type set to client:
 
 ```puppet
-class { '::icinga': client  => true }
+class { "::icinga": type  => "client" }
 ```
 
 ### Server
 
-Simply call the module with parameter server enabled:
+Simply call the module with parameter type set to server:
 
 ```puppet
-class { '::icinga': server => true }
+class { "::icinga": type => "server" }
 ```
 
 ## Reference
 
+### Parameters
+
+Here is the list of parameters used by this module.
+
+#### `$type`
+
+Specify if client or server components should be installed
+Default value is client
+
+#### `$plugins`
+
+Specify one or more plugins that should be installed
+Default value is none (not implemented yet)
+
+#### `$exported_ressources`
+
+Specify if exported resources should be used
+Default value is false (not implemented yet)
+
+#### `$server_acl`
+
+Specify the Icinga servers that are allowed to access monitoring client
+Default value is 127.0.0.1
+
 ## Limitations
 
-This module has been built on and tested against Puppet 3.7 and higher.
+This module has been built on and tested against Puppet 4.2 and higher.
 
 The module has been tested on:
 
@@ -98,7 +122,7 @@ Testing on other platforms has been light and cannot be guaranteed.
 
 The documentation isn't feature complete yet and not all functions are documented.
 
-##Development
+## Development
 
 If you like to add or improve this module, feel free to fork the module and send
 me a merge request with the modification.

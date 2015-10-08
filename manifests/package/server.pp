@@ -37,8 +37,4 @@ class icinga::package::server {
   package { $icinga::params::packageRrdTool: ensure => installed; }
 
   package { $icinga::params::packageRrdToolPerl: ensure => installed; }
-
-  package { $icinga::params::packagePnp4Nagios: ensure => installed; }
-
-  package { $icinga::params::packageIcingaWebPnp: ensure => installed; }
 }

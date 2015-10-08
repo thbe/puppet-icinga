@@ -15,12 +15,12 @@
 #   Specify one or more plugins that should be installed
 #   Default value is none (not implemented yet)
 #
-# [*exportedRessources*]
+# [*exported_ressources*]
 #   Specify if exported resources should be used
 #   Default value is false (not implemented yet)
 #
-# [*serverAcl*]
-#   Specify the Icinga servers that are allowed to access NRPE
+# [*server_acl*]
+#   Specify the Icinga servers that are allowed to access monitoring client
 #   Default value is 127.0.0.1
 #
 # === Variables
@@ -29,9 +29,7 @@
 #
 # === Examples
 #
-#  class { '::icinga':
-#    type => 'client',
-#  }
+#  class { "::icinga": type => "client", }
 #
 # === Authors
 #
