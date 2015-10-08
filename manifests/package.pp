@@ -2,7 +2,13 @@
 #
 # This class contain the service configuration for Icinga
 #
-# Parameters:   This class has no parameters
+# Parameters:   This module has no parameters
+#
+# Actions:      This module has no actions
+#
+# Requires:     This module has no requirements
+#
+# Sample Usage: include icinga::package
 #
 class icinga::package {
 

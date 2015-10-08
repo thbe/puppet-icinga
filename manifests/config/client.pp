@@ -1,34 +1,40 @@
 # Class: icinga::config::client
 #
-# This class contain the configuration for Icinga
+# This class contain the client configuration for Icinga
 #
-# Parameters: This class has no parameters
+# Parameters:   This module has no parameters
+#
+# Actions:      This module has no actions
+#
+# Requires:     This module has no requirements
+#
+# Sample Usage: include icinga::config::client
 #
 class icinga::config::client {
 
   # Setup NRPE client
   file {
-    $icinga::params::configNrpeConfig:
+    $icinga::params::config_nrpe_config:
       ensure  => present,
       mode    => '0644',
       owner   => root,
       group   => root,
-      path    => $icinga::params::configNrpeConfig,
-      content => template($icinga::params::configNrpeConfigTemplate),
-      require => Package[$icinga::params::packageNrpe];
+      path    => $icinga::params::config_nrpe_config,
+      content => template($icinga::params::config_nrpe_config_template),
+      require => Package[$icinga::params::package_nrpe];
 
-    $icinga::params::configNrpeConfigBase:
+    $icinga::params::config_nrpe_config_base:
       ensure  => present,
       mode    => '0644',
       owner   => root,
       group   => root,
-      path    => $icinga::params::configNrpeConfigBase,
-      content => template($icinga::params::configNrpeConfigBaseTemplate),
-      require => Package[$icinga::params::packageNrpe];
+      path    => $icinga::params::config_nrpe_config_base,
+      content => template($icinga::params::config_nrpe_config_base_template),
+      require => Package[$icinga::params::package_nrpe];
   }
 
   # Include exported ressources if enabled
-  if $icinga::exportedResources {
+  if $icinga::exported_resources {
     if $::kernel == 'Linux' {
       $icinga_hostgroup = $::hostgroup ? {
         storage => 'puppet,linux,storage',
@@ -48,16 +54,16 @@ class icinga::config::client {
       address    => $::ipaddress,
       use        => $icinga_template,
       hostgroups => $icinga_hostgroup,
-      target     => "${icinga::params::configPuppetRessourceDirectory}/${::fqdn}_host.cfg";
+      target     => "${icinga::params::config_puppet_ressource_directory}/${::fqdn}_host.cfg";
     }
 
-    @@nagios_hostextinfo { $::fqdn:
-      ensure          => present,
-      icon_image_alt  => $::operatingsystem,
-      icon_image      => "${icinga::params::iconfile}.png",
-      statusmap_image => "${icinga::params::iconfile}.gd2",
-      target          => "${icinga::params::configPuppetRessourceDirectory}/${::fqdn}_host_ext.cfg"
-    }
+    #@@nagios_hostextinfo { $::fqdn:
+    #  ensure          => present,
+    #  icon_image_alt  => $::operatingsystem,
+    #  icon_image      => "${icinga::params::iconfile}.png",
+    #  statusmap_image => "${icinga::params::iconfile}.gd2",
+    #  target          => "${icinga::params::config_puppet_ressource_directory}/${::fqdn}_host_ext.cfg"
+    #}
 
     @@nagios_service { "check-host-alive_${::hostname}":
       check_command       => 'check-host-alive!100.0,20%!500.0,60%',
@@ -66,7 +72,7 @@ class icinga::config::client {
       notification_period => $icinga_service_notification,
       servicegroups       => $icinga_service_groups,
       service_description => "${::hostname}_check-host-alive",
-      target              => "${icinga::params::configPuppetRessourceDirectory}/${::fqdn}_service_host_alive.cfg",
+      target              => "${icinga::params::config_puppet_ressource_directory}/${::fqdn}_service_host_alive.cfg",
       require             => Nagios_host[$::fqdn];
     }
 
@@ -77,7 +83,7 @@ class icinga::config::client {
       notification_period => $icinga_service_notification,
       servicegroups       => $icinga_service_groups,
       service_description => "${::hostname}_check_nrpe_users",
-      target              => "${icinga::params::configPuppetRessourceDirectory}/${::fqdn}_service_users.cfg",
+      target              => "${icinga::params::config_puppet_ressource_directory}/${::fqdn}_service_users.cfg",
       require             => Nagios_host[$::fqdn];
     }
 
@@ -88,7 +94,7 @@ class icinga::config::client {
       notification_period => $icinga_service_notification,
       servicegroups       => $icinga_service_groups,
       service_description => "${::hostname}_check_nrpe_load",
-      target              => "${icinga::params::configPuppetRessourceDirectory}/${::fqdn}_service_load.cfg",
+      target              => "${icinga::params::config_puppet_ressource_directory}/${::fqdn}_service_load.cfg",
       require             => Nagios_host[$::fqdn];
     }
 
@@ -99,7 +105,7 @@ class icinga::config::client {
       notification_period => $icinga_service_notification,
       servicegroups       => $icinga_service_groups,
       service_description => "${::hostname}_check_nrpe_procs",
-      target              => "${icinga::params::configPuppetRessourceDirectory}/${::fqdn}_service_procs.cfg",
+      target              => "${icinga::params::config_puppet_ressource_directory}/${::fqdn}_service_procs.cfg",
       require             => Nagios_host[$::fqdn];
     }
 
@@ -110,7 +116,7 @@ class icinga::config::client {
       notification_period => $icinga_service_notification,
       servicegroups       => $icinga_service_groups,
       service_description => "${::hostname}_check_nrpe_procs_zombies",
-      target              => "${icinga::params::configPuppetRessourceDirectory}/${::fqdn}_service_zombies.cfg",
+      target              => "${icinga::params::config_puppet_ressource_directory}/${::fqdn}_service_zombies.cfg",
       require             => Nagios_host[$::fqdn];
     }
 
@@ -121,7 +127,7 @@ class icinga::config::client {
       notification_period => $icinga_service_notification,
       servicegroups       => $icinga_service_groups,
       service_description => "${::hostname}_check_nrpe_disk_root",
-      target              => "${icinga::params::configPuppetRessourceDirectory}/${::fqdn}_service_disk_root.cfg",
+      target              => "${icinga::params::config_puppet_ressource_directory}/${::fqdn}_service_disk_root.cfg",
       require             => Nagios_host[$::fqdn];
     }
 
@@ -132,7 +138,7 @@ class icinga::config::client {
       notification_period => $icinga_service_notification,
       servicegroups       => $icinga_service_groups,
       service_description => "${::hostname}_check_nrpe_disk_boot",
-      target              => "${icinga::params::configPuppetRessourceDirectory}/${::fqdn}_service_disk_boot.cfg",
+      target              => "${icinga::params::config_puppet_ressource_directory}/${::fqdn}_service_disk_boot.cfg",
       require             => Nagios_host[$::fqdn];
     }
 
@@ -143,7 +149,7 @@ class icinga::config::client {
       notification_period => $icinga_service_notification,
       servicegroups       => $icinga_service_groups,
       service_description => "${::hostname}_check_nrpe_swap",
-      target              => "${icinga::params::configPuppetRessourceDirectory}/${::fqdn}_service_swap.cfg",
+      target              => "${icinga::params::config_puppet_ressource_directory}/${::fqdn}_service_swap.cfg",
       require             => Nagios_host[$::fqdn];
     }
 
@@ -154,7 +160,7 @@ class icinga::config::client {
       notification_period => $icinga_service_notification,
       servicegroups       => $icinga_service_groups,
       service_description => "${::hostname}_check_ssh",
-      target              => "${icinga::params::configPuppetRessourceDirectory}/${::fqdn}_service_ssh.cfg",
+      target              => "${icinga::params::config_puppet_ressource_directory}/${::fqdn}_service_ssh.cfg",
       require             => Nagios_host[$::fqdn];
     }
   }

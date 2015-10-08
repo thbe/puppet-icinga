@@ -1,111 +1,104 @@
 # Class: icinga::config::server
 #
-# This class contain the configuration for Icinga
+# This class contain the server configuration for Icinga
 #
-# Parameters: This class has no parameters
+# Parameters:   This module has no parameters
+#
+# Actions:      This module has no actions
+#
+# Requires:     This module has no requirements
+#
+# Sample Usage: include icinga::config::server
 #
 class icinga::config::server {
-  # Setup Icinga server
+  # Setup Icinga server features
   file {
-    $icinga::params::configIcinga2LinkChecker:
+    $icinga::params::config_icinga2_link_checker:
       ensure  => link,
-      mode    => '0775',
-      owner   => icinga,
-      group   => icinga,
-      path    => $icinga::params::configIcinga2FeatureChecker,
-      require => Package[$icinga::params::packageCommon];
+      target  => $icinga::params::config_icinga2_feature_checker,
+      require => Package[$icinga::params::package_icinga2];
 
-    $icinga::params::configIcinga2LinkIdoMysql:
+    $icinga::params::config_icinga2_link_command:
       ensure  => link,
-      mode    => '0775',
-      owner   => icinga,
-      group   => icinga,
-      path    => $icinga::params::configIcinga2FeatureIdoMysql,
-      require => Package[$icinga::params::packageCommon];
+      target  => $icinga::params::config_icinga2_feature_command,
+      require => Package[$icinga::params::package_icinga2];
 
-    $icinga::params::configIcinga2LinkMainlog:
+    $icinga::params::config_icinga2_link_graphite:
       ensure  => link,
-      mode    => '0775',
-      owner   => icinga,
-      group   => icinga,
-      path    => $icinga::params::configIcinga2FeatureMainlog,
-      require => Package[$icinga::params::packageCommon];
+      target  => $icinga::params::config_icinga2_feature_graphite,
+      require => Package[$icinga::params::package_icinga2];
 
-    $icinga::params::configIcinga2LinkNotification:
+    $icinga::params::config_icinga2_link_ido_mysql:
       ensure  => link,
-      mode    => '0775',
-      owner   => icinga,
-      group   => icinga,
-      path    => $icinga::params::configIcinga2FeatureNotification,
-      require => Package[$icinga::params::packageCommon];
+      target  => $icinga::params::config_icinga2_feature_ido_mysql,
+      require => Package[$icinga::params::package_icinga2];
 
-    $icinga::params::configIcinga2LinkPerfdata:
+    $icinga::params::config_icinga2_link_mainlog:
       ensure  => link,
-      mode    => '0775',
-      owner   => icinga,
-      group   => icinga,
-      path    => $icinga::params::configIcinga2FeaturePerfdata,
-      require => Package[$icinga::params::packageCommon];
+      target  => $icinga::params::config_icinga2_feature_mainlog,
+      require => Package[$icinga::params::package_icinga2];
 
-    $icinga::params::configIcinga2ConfDirectoryCustom:
-      ensure  => directory,
-      mode    => '0750',
-      owner   => icinga,
-      group   => icinga,
-      path    => $icinga::params::configIcinga2ConfDirectoryCustom,
-      require => Package[$icinga::params::packageCommon];
+    $icinga::params::config_icinga2_link_notification:
+      ensure  => link,
+      target  => $icinga::params::config_icinga2_feature_notification,
+      require => Package[$icinga::params::package_icinga2];
 
-    $icinga::params::configIcinga2ConfDirectoryPuppet:
-      ensure  => directory,
-      mode    => '0750',
-      owner   => icinga,
-      group   => icinga,
-      path    => $icinga::params::configIcinga2ConfDirectoryPuppet,
-      require => Package[$icinga::params::packageCommon];
-
-    $icinga::params::configIcinga2ExtensionsDirectoryPuppet:
-      ensure  => directory,
-      mode    => '0750',
-      owner   => icinga,
-      group   => icinga,
-      path    => $icinga::params::configIcinga2ExtensionsDirectoryPuppet,
-      require => Package[$icinga::params::packageCommon];
-
-    $icinga::params::configServiceExtension:
-      ensure  => present,
-      mode    => '0640',
-      owner   => icinga,
-      group   => icinga,
-      path    => $icinga::params::configServiceExtension,
-      source  => $icinga::params::configServiceExtensionFile,
-      require => Package[$icinga::params::packageCommon];
+    $icinga::params::config_icinga2_link_syslog:
+      ensure  => link,
+      target  => $icinga::params::config_icinga2_feature_syslog,
+      require => Package[$icinga::params::package_icinga2];
   }
 
-  # Setup Icinga 2 web server
+  # Setup Icingaweb2 server features
   file {
-    $icinga::params::configIcingaweb2LinkDoc:
-      ensure  => link,
-      mode    => '0775',
-      owner   => icinga,
-      group   => icinga,
-      path    => $icinga::params::configIcingaweb2FeatureDoc,
-      require => Package[$icinga::params::packageCommonWeb];
+    $icinga::params::config_icingaweb2_enablemodules_directory:
+      ensure  => directory,
+      mode    => '2770',
+      owner   => root,
+      group   => icingaweb2,
+      require => Package[$icinga::params::package_icingaweb2];
 
-    $icinga::params::configIcingaweb2LinkMonitoring:
+    $icinga::params::config_icingaweb2_link_doc:
       ensure  => link,
-      mode    => '0775',
+      target  => $icinga::params::config_icingaweb2_feature_doc,
+      require => Package[$icinga::params::package_icingaweb2];
+
+    $icinga::params::config_icingaweb2_link_monitoring:
+      ensure  => link,
+      target  => $icinga::params::config_icingaweb2_feature_monitoring,
+      require => Package[$icinga::params::package_icingaweb2];
+  }
+
+  # Setup Icinga server puppet extensions
+  file {
+    $icinga::params::config_icinga2_conf_puppet_directory:
+      ensure  => directory,
+      mode    => '0750',
       owner   => icinga,
       group   => icinga,
-      path    => $icinga::params::configIcingaweb2FeatureMonitoring,
-      require => Package[$icinga::params::packageCommonWeb];
+      source  => $icinga::params::config_icinga2_conf_puppet_content,
+      recurse => true,
+      require => Package[$icinga::params::package_icinga2];
+  }
+
+  # Setup Icinga server custom extensions
+  file {
+    $icinga::params::config_icinga2_conf_custom_directory:
+      ensure  => directory,
+      mode    => '0750',
+      owner   => icinga,
+      group   => icinga,
+      source  => $icinga::params::config_icinga2_conf_custom_content,
+      recurse => true,
+      require => Package[$icinga::params::package_icinga2];
   }
 
   # Include exported ressources if enabled
-  if $icinga::exportedResources {
-    Nagios_host         <<| |>> { notify => Service[$icinga::params::serviceCommon] }
-    Nagios_hostextinfo  <<| |>> { notify => Service[$icinga::params::serviceCommon] }
-    Nagios_hostgroup    <<| |>> { notify => Service[$icinga::params::serviceCommon] }
-    Nagios_service      <<| |>> { notify => Service[$icinga::params::serviceCommon] }
-    Nagios_servicegroup <<| |>> { notify => Service[$icinga::params::serviceCommon] }
+  if $icinga::exported_resources {
+    Nagios_host         <<| |>> { notify => Service[$icinga::params::service_icinga2] }
+    Nagios_hostextinfo  <<| |>> { notify => Service[$icinga::params::service_icinga2] }
+    Nagios_hostgroup    <<| |>> { notify => Service[$icinga::params::service_icinga2] }
+    Nagios_service      <<| |>> { notify => Service[$icinga::params::service_icinga2] }
+    Nagios_servicegroup <<| |>> { notify => Service[$icinga::params::service_icinga2] }
   }
 }

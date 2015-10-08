@@ -2,7 +2,13 @@
 #
 # This class contain the configuration for Icinga MySQL databases
 #
-# Parameters: This class has no parameters
+# Parameters:   This module has no parameters
+#
+# Actions:      This module has no actions
+#
+# Requires:     This module has no requirements
+#
+# Sample Usage: include icinga::config::mysql
 #
 class icinga::config::mysql {
   # Setup mysql databases
@@ -72,22 +78,22 @@ class icinga::config::mysql {
 
   # Setup Icinga server
   file {
-    $icinga::params::configIcinga2IdoMysql:
+    $icinga::params::config_icinga2_ido_mysql:
       ensure  => present,
       mode    => '0660',
       owner   => root,
       group   => root,
-      path    => $icinga::params::configIcinga2IdoMysql,
-      content => template($icinga::params::configIcinga2IdoMysqlTemplate),
-      require => Package[$icinga::params::packageIdoMysql];
+      path    => $icinga::params::config_icinga2_ido_mysql,
+      content => template($icinga::params::config_icinga2_ido_mysql_template),
+      require => Package[$icinga::params::package_icinga2_ido_mysql];
 
-    $icinga::params::configSchemaScript:
+    $icinga::params::config_schema_script:
       ensure  => present,
       mode    => '0755',
       owner   => root,
       group   => root,
-      path    => $icinga::params::configSchemaScript,
-      source  => $icinga::params::configSchemaScriptFile,
-      require => Package[$icinga::params::packageCommon];
+      path    => $icinga::params::config_schema_script,
+      source  => $icinga::params::config_schema_script_file,
+      require => Package[$icinga::params::package_icinga2_ido_mysql];
   }
 }

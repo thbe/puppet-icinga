@@ -2,39 +2,43 @@
 #
 # This class contain the packages for Icinga 2 server installation
 #
-# Parameters:   This class has no parameters
+# Parameters:   This module has no parameters
+#
+# Actions:      This module has no actions
+#
+# Requires:     This module has no requirements
+#
+# Sample Usage: include icinga::package::server
 #
 class icinga::package::server {
 
   # Server relevant packages
 
-  package { $icinga::params::packageCommon: ensure => installed; }
+  package { $icinga::params::package_icinga2: ensure => installed; }
 
-  package { $icinga::params::packageCommonCli: ensure => installed; }
+  package { $icinga::params::package_icingacli: ensure => installed; }
 
-  package { $icinga::params::packageCommonWeb: ensure => installed; }
+  package { $icinga::params::package_icingaweb2: ensure => installed; }
 
-  package { $icinga::params::packageApache: ensure => installed; }
+  package { $icinga::params::package_httpd: ensure => installed; }
 
-  package { $icinga::params::packageIdoMysql: ensure => installed; }
+  package { $icinga::params::package_icinga2_ido_mysql: ensure => installed; }
 
-  package { $icinga::params::packageIdoutilsMysql: ensure => installed; }
+  package { $icinga::params::package_php: ensure => installed; }
 
-  package { $icinga::params::packagePhpCommon: ensure => installed; }
+  package { $icinga::params::package_php_mysql: ensure => installed; }
 
-  package { $icinga::params::packagePhpMysql: ensure => installed; }
+  package { $icinga::params::package_php_ldap: ensure => installed; }
 
-  package { $icinga::params::packagePhpLdap: ensure => installed; }
+  package { $icinga::params::package_php_gd: ensure => installed; }
 
-  package { $icinga::params::packagePhpGd: ensure => installed; }
+  package { $icinga::params::package_net_snmp: ensure => installed; }
 
-  package { $icinga::params::packageNetSnmp: ensure => installed; }
+  package { $icinga::params::package_net_snmp_devel: ensure => installed; }
 
-  package { $icinga::params::packageNetSnmpDevel: ensure => installed; }
+  package { $icinga::params::package_net_snmp_utils: ensure => installed; }
 
-  package { $icinga::params::packageNetSnmpUtils: ensure => installed; }
+  package { $icinga::params::package_rrdtool: ensure => installed; }
 
-  package { $icinga::params::packageRrdTool: ensure => installed; }
-
-  package { $icinga::params::packageRrdToolPerl: ensure => installed; }
+  package { $icinga::params::package_rrdtool_perl: ensure => installed; }
 }
