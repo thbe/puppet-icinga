@@ -95,10 +95,10 @@ class icinga::config::server {
 
   # Include exported ressources if enabled
   if $icinga::exported_resources {
-    Nagios_host         <<| |>> { notify => Service[$icinga::params::service_icinga2] }
-    Nagios_hostextinfo  <<| |>> { notify => Service[$icinga::params::service_icinga2] }
-    Nagios_hostgroup    <<| |>> { notify => Service[$icinga::params::service_icinga2] }
-    Nagios_service      <<| |>> { notify => Service[$icinga::params::service_icinga2] }
-    Nagios_servicegroup <<| |>> { notify => Service[$icinga::params::service_icinga2] }
+    Icinga::Config::Object::Host         <<| |>> { notify => Service[$icinga::params::service_icinga2] }
+    Icinga::Config::Object::Hostextinfo  <<| |>> { notify => Service[$icinga::params::service_icinga2] }
+    Icinga::Config::Object::Hostgroup    <<| |>> { notify => Service[$icinga::params::service_icinga2] }
+    Icinga::Config::Object::Service      <<| |>> { notify => Service[$icinga::params::service_icinga2] }
+    Icinga::Config::Object::Servicegroup <<| |>> { notify => Service[$icinga::params::service_icinga2] }
   }
 }

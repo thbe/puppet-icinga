@@ -13,6 +13,7 @@
     { "operatingsystem": "Scientific", "operatingsystemrelease": [ "7.0" ] }
   ],
   "dependencies": [
-    { "name": "puppetlabs-mysql", "version_range": ">=2.3.x <3.0.0" }
+    { "name": "puppetlabs-mysql", "version_range": ">=2.3.x <3.0.0" },
+    { "name": "puppetlabs-concat", "version_range": ">=1.2.x <2.0.0" }
   ]
 }
