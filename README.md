@@ -39,7 +39,23 @@ you know how this can influence the stability of you Icinga 2 instance.
 
 ### What icinga affects
 
-* Icinga will install MySQL, PHP, Apache, Icinga2 and Icingaweb2
+The icinga module will install the following packages and configure them as needed
+by the module:
+
+* MySQL
+* PHP
+* Apache
+* Icinga2
+* Icingaweb2
+
+### Setup requirements
+
+You need to activate the Icinga repository before you can setup the Icinga instance.
+If you use a rpm based system from the RedHat family you can use my yum module:
+
+```puppet
+class { '::yum': repoIcinga => true }
+```
 
 ### Beginning with icinga
 
@@ -74,9 +90,9 @@ This module has been built on and tested against Puppet 3.7 and higher.
 
 The module has been tested on:
 
-* RedHat Enterprise Linux 6
-* Scientific Linux 6
-* CentOS Linux 6
+* RedHat Enterprise Linux 7
+* Scientific Linux 7
+* CentOS Linux 7
 
 Testing on other platforms has been light and cannot be guaranteed.
 

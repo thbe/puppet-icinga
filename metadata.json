@@ -1,6 +1,6 @@
 {
   "name": "thbe-icinga",
-  "version": "0.6.1",
+  "version": "0.6.5",
   "author": "thbe",
   "summary": "Install an Icinga instance",
   "license": "GPL-3.0",
@@ -8,12 +8,11 @@
   "project_page": "https://github.com/thbe/puppet-icinga",
   "issues_url": "https://github.com/thbe/puppet-icinga/issues",
   "operatingsystem_support": [
-    { "operatingsystem": "RedHat", "operatingsystemrelease": [ "6.0", "7.0" ] },
-    { "operatingsystem": "CentOS", "operatingsystemrelease": [ "6.0", "7.0" ] },
-    { "operatingsystem": "Scientific", "operatingsystemrelease": [ "6.0", "7.0" ] }
+    { "operatingsystem": "RedHat", "operatingsystemrelease": [ "7.0" ] },
+    { "operatingsystem": "CentOS", "operatingsystemrelease": [ "7.0" ] },
+    { "operatingsystem": "Scientific", "operatingsystemrelease": [ "7.0" ] }
   ],
   "dependencies": [
-    { "name": "thbe-yum", "version_range": ">=0.5.x <0.6.0" },
     { "name": "puppetlabs-mysql", "version_range": ">=2.3.x <3.0.0" }
   ]
 }

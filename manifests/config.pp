@@ -12,7 +12,5 @@ class icinga::config {
   if $icinga::type == 'server' {
     include icinga::config::mysql
     include icinga::config::server
-    include icinga::config::web2
-    include icinga::config::pnp4nagios
   }
 }

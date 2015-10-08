@@ -42,22 +42,21 @@
 # Copyright 2015 Thomas Bendler, unless otherwise noted.
 #
 class icinga (
+  $manage_repos      = false,
   $type              = 'client',
   $plugins           = ['none'],
-  $exportedResources = false,
-  $serverAcl         = '127.0.0.1',
+  $exported_resources = false,
+  $server_acl         = '127.0.0.1',
   ) inherits icinga::params {
 
   # Start workflow
   if $icinga::params::linux {
     # Containment
-    contain icinga::repository
     contain icinga::package
     contain icinga::config
     contain icinga::service
 
     # Include classes
-    Class['icinga::repository'] ->
     Class['icinga::package'] ->
     Class['icinga::config'] ->
     Class['icinga::service']

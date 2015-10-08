@@ -1,3 +1,8 @@
+0.6.5 2015-10-08 thbe <project@bendler-net.de>
+ * Rewrite for pure icinga2/icingaweb2 handling
+ * Removed yum module dependencies
+ * Removed pnp4nagios
+
 0.6.1 2015-09-08 thbe <project@bendler-net.de>
  * Cleanup
 

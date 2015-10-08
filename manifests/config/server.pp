@@ -81,6 +81,25 @@ class icinga::config::server {
       require => Package[$icinga::params::packageCommon];
   }
 
+  # Setup Icinga 2 web server
+  file {
+    $icinga::params::configIcingaweb2LinkDoc:
+      ensure  => link,
+      mode    => '0775',
+      owner   => icinga,
+      group   => icinga,
+      path    => $icinga::params::configIcingaweb2FeatureDoc,
+      require => Package[$icinga::params::packageCommonWeb];
+
+    $icinga::params::configIcingaweb2LinkMonitoring:
+      ensure  => link,
+      mode    => '0775',
+      owner   => icinga,
+      group   => icinga,
+      path    => $icinga::params::configIcingaweb2FeatureMonitoring,
+      require => Package[$icinga::params::packageCommonWeb];
+  }
+
   # Include exported ressources if enabled
   if $icinga::exportedResources {
     Nagios_host         <<| |>> { notify => Service[$icinga::params::serviceCommon] }
