@@ -15,7 +15,11 @@ class icinga::params {
   # Operating system specific definitions
   case $::osfamily {
     'RedHat' : {
-      $linux                                      = true
+      if $::lsbmajdistrelease == '5' {
+        $linux                                    = false
+      } else {
+        $linux                                    = true
+      }
 
       # Package definition
       $package_icinga2                            = 'icinga2'

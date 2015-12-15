@@ -52,7 +52,7 @@ class icinga::config::client {
       ensure     => present,
       alias      => $::hostname,
       address    => $::ipaddress,
-      use        => $icinga_template,
+      use        => $icinga_host_template,
       hostgroups => $icinga_hostgroup,
       target     => "${icinga::params::config_puppet_ressource_directory}/${::fqdn}_host.cfg";
     }

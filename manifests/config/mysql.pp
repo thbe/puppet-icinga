@@ -14,9 +14,13 @@ class icinga::config::mysql {
   # Setup mysql databases
   class { '::mysql::server':
     root_password    => '0nly4install',
-    override_options => { 'mysqld' => { 'max_connections' => '1024' } },
-    databases => {
-      'icinga' => {
+    override_options => {
+      'mysqld' => {
+        'max_connections' => '1024'
+        }
+      },
+    databases        => {
+      'icinga'       => {
         ensure  => present,
         charset => 'utf8',
       },
@@ -25,8 +29,8 @@ class icinga::config::mysql {
         charset => 'utf8',
       },
     },
-    grants => {
-      'icinga@localhost/icinga.*' => {
+    grants           => {
+      'icinga@localhost/icinga.*'             => {
         ensure     => present,
         options    => [ 'GRANT' ],
         privileges => [ 'CREATE', 'CREATE VIEW', 'INDEX', 'SELECT', 'INSERT', 'UPDATE', 'DELETE', 'DROP', 'EXECUTE' ],
@@ -41,8 +45,8 @@ class icinga::config::mysql {
         user       => 'icingaweb_db@localhost',
       },
     },
-    users => {
-      'icinga@localhost' => {
+    users            => {
+      'icinga@localhost'       => {
         ensure                   => 'present',
         max_connections_per_hour => '0',
         max_queries_per_hour     => '0',

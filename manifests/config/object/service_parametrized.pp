@@ -8,7 +8,9 @@ define icinga::config::object::service_parametrized($check_command = false, $com
     service_name  => $name,
     host_name     => $::fqdn,
     check_command => $check_command,
-    vars          => { nrpe_command => "${command}${name}" },
+    vars          => {
+      nrpe_command => "${command}${name}"
+    },
     groups        => $groups,
   }
 }

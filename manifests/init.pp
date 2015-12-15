@@ -40,12 +40,12 @@
 # Copyright 2015 Thomas Bendler, unless otherwise noted.
 #
 class icinga (
-  $manage_repos      = false,
-  $type              = 'client',
-  $plugins           = ['none'],
-  $exported_resources = false,
+  $type               = 'client',
   $server_acl         = '127.0.0.1',
-  ) inherits icinga::params {
+  $plugins            = ['none'],
+  $manage_repos       = false,
+  $exported_resources = false,
+) inherits icinga::params {
 
   # Start workflow
   if $icinga::params::linux {
@@ -58,5 +58,8 @@ class icinga (
     Class['icinga::package'] ->
     Class['icinga::config'] ->
     Class['icinga::service']
+  }
+  else {
+    warning('The current operating system is not supported!')
   }
 }

@@ -54,7 +54,7 @@ You need to activate the Icinga repository before you can setup the Icinga insta
 If you use a rpm based system from the RedHat family you can use my yum module:
 
 ```puppet
-class { "::yum": repoIcinga => true }
+class { "::yum": repo_icinga => true }
 ```
 
 ### Beginning with icinga
