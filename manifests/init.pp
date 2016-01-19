@@ -1,41 +1,50 @@
-# == Class: icinga
+# Class: icinga
+# ===========================
 #
 # This is the icinga module. This module install all things
 # required to setup Icinga 2.
 #
-# === Parameters
+# Parameters
+# ----------
 #
 # Here is the list of parameters used by this module.
 #
-# [*type*]
+# * `type`
 #   Specify if client or server components should be installed
 #   Default value is client
 #
-# [*plugins*]
+# * `plugins`
 #   Specify one or more plugins that should be installed
 #   Default value is none (not implemented yet)
 #
-# [*exported_ressources*]
+# * `exported_ressources`
 #   Specify if exported resources should be used
 #   Default value is false (not implemented yet)
 #
-# [*server_acl*]
+# * `server_acl`
 #   Specify the Icinga servers that are allowed to access monitoring client
 #   Default value is 127.0.0.1
 #
-# === Variables
+# Variables
+# ----------
 #
 # No additonal variables are required for this module
 #
-# === Examples
+# Examples
+# --------
 #
-#  class { "::icinga": type => "client", }
+# @example
+#    class { 'icinga':
+#      type => 'client',
+#    }
 #
-# === Authors
+# Authors
+# -------
 #
 # Thomas Bendler <project@bendler-net.de>
 #
-# === Copyright
+# Copyright
+# ---------
 #
 # Copyright 2015 Thomas Bendler, unless otherwise noted.
 #
@@ -43,7 +52,6 @@ class icinga (
   $type               = 'client',
   $server_acl         = '127.0.0.1',
   $plugins            = ['none'],
-  $manage_repos       = false,
   $exported_resources = false,
 ) inherits icinga::params {
 

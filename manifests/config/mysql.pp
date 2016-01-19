@@ -21,7 +21,9 @@ class icinga::config::mysql {
       },
     databases        => {
       'icinga'       => {
+        # lint:ignore:ensure_first_param
         ensure  => present,
+        # lint:endignore
         charset => 'utf8',
       },
       'icingaweb_db' => {

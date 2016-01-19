@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>
+  File: README
+  
+    &mdash; Documentation by YARD 0.8.7.6
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '';
+  framesUrl = "frames.html#!file.README.html";
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: README</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="puppet_manifest_list_link"
+        href="puppet_manifest_list.html">
+      Puppet Manifest List
+    </a>
+  
+    <a class="full_list_link" id="puppet_plugin_list_link"
+        href="puppet_plugin_list.html">
+      Puppet Plugin List
+    </a>
+  
+    <a class="full_list_link" id="puppet_type_list_link"
+        href="puppet_type_list.html">
+      Puppet Type List
+    </a>
+  
+    <a class="full_list_link" id="puppet_provider_list_link"
+        href="puppet_provider_list.html">
+      Puppet Provider List
+    </a>
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><div id='filecontents'>
+<h1 id="label-icinga">icinga</h1>
+
+<h4 id="label-Table+of+Contents">Table of Contents</h4>
+<ol><li>
+<p><a href="#overview">Overview</a></p>
+</li><li>
+<p><a href="#module-description">Module Description - What the module does and
+why it is useful</a></p>
+</li><li>
+<p><a href="#setup">Setup - The basics of getting started with icinga</a></p>
+<ul><li>
+<p><a href="#what-icinga-affects">What icinga affects</a></p>
+</li><li>
+<p><a href="#setup-requirements">Setup requirements</a></p>
+</li><li>
+<p><a href="#beginning-with-icinga">Beginning with icinga</a></p>
+</li></ul>
+</li><li>
+<p><a href="#usage">Usage - Configuration options and additional
+functionality</a></p>
+</li><li>
+<p><a href="#reference">Reference - An under-the-hood peek at what the module
+is doing and how</a></p>
+</li><li>
+<p><a href="#limitations">Limitations - OS compatibility, etc.</a></p>
+</li><li>
+<p><a href="#development">Development - Guide for contributing to the
+module</a></p>
+</li></ol>
+
+<h2 id="label-Overview">Overview</h2>
+
+<p>This module install an Icinga 2 instance with the new Incinga 2 web
+interface.</p>
+
+<h2 id="label-Module+Description">Module Description</h2>
+
+<p>This module install an Icinga 2 instance with the new Incinga 2 web
+interface. It let you define resources that the instance should monitor.</p>
+
+<p>The usage of stored procedures is optional. The reason is quite simple, in
+a perfect world, all resources in a network are managed with Puppet. In a
+real world, there are a lot of resources like switches, routers, printers
+that can&#39;t be managed with Puppet and other resources that aren&#39;t
+managed by Puppet because of whatever reasons. So you have to define
+monitoring resources anyway beside of stored procedures. Mixing manually
+defined resources and resources from stored procedures is not really
+predictable and therefor error-prone. So stored procedures are disabled by
+default and you should only acitvate them if you know how this can
+influence the stability of you Icinga 2 instance.</p>
+
+<h2 id="label-Setup">Setup</h2>
+
+<h3 id="label-What+icinga+affects">What icinga affects</h3>
+
+<p>The icinga module will install the following packages and configure them as
+needed by the module:</p>
+<ul><li>
+<p>MySQL</p>
+</li><li>
+<p>PHP</p>
+</li><li>
+<p>Apache</p>
+</li><li>
+<p>Icinga2</p>
+</li><li>
+<p>Icingaweb2</p>
+</li></ul>
+
+<h3 id="label-Setup+requirements">Setup requirements</h3>
+
+<p>You need to activate the Icinga repository before you can setup the Icinga
+instance. If you use a rpm based system from the RedHat family you can use
+my yum module:</p>
+
+<pre class="code ruby"><code class="ruby">class { &quot;::yum&quot;: repo_icinga =&gt; true }</code></pre>
+
+<h3 id="label-Beginning+with+icinga">Beginning with icinga</h3>
+
+<p>The module isn&#39;t very complex right now, see the usage section for
+instructions.</p>
+
+<h2 id="label-Usage">Usage</h2>
+
+<p>The module can be used with server or client installation in mind. What
+kind of installation is performed can be controlled with parameters.</p>
+
+<h3 id="label-Client">Client</h3>
+
+<p>Simply call the module with parameter type set to client:</p>
+
+<pre class="code ruby"><code class="ruby">class { &quot;::icinga&quot;: type  =&gt; &quot;client&quot; }</code></pre>
+
+<h3 id="label-Server">Server</h3>
+
+<p>Simply call the module with parameter type set to server:</p>
+
+<pre class="code ruby"><code class="ruby">class { &quot;::icinga&quot;: type =&gt; &quot;server&quot; }</code></pre>
+
+<h2 id="label-Reference">Reference</h2>
+
+<h3 id="label-Parameters">Parameters</h3>
+
+<p>Here is the list of parameters used by this module.</p>
+
+<h4 id="label-24type"><code>$type</code></h4>
+
+<p>Specify if client or server components should be installed Default value is
+client</p>
+
+<h4 id="label-24plugins"><code>$plugins</code></h4>
+
+<p>Specify one or more plugins that should be installed Default value is none
+(not implemented yet)</p>
+
+<h4 id="label-24exported_ressources"><code>$exported_ressources</code></h4>
+
+<p>Specify if exported resources should be used Default value is false (not
+implemented yet)</p>
+
+<h4 id="label-24server_acl"><code>$server_acl</code></h4>
+
+<p>Specify the Icinga servers that are allowed to access monitoring client
+Default value is 127.0.0.1</p>
+
+<h2 id="label-Limitations">Limitations</h2>
+
+<p>This module has been built on and tested against Puppet 4.2 and higher.</p>
+
+<p>The module has been tested on:</p>
+<ul><li>
+<p>RedHat Enterprise Linux 7</p>
+</li><li>
+<p>Scientific Linux 7</p>
+</li><li>
+<p>CentOS Linux 7</p>
+</li></ul>
+
+<p>Testing on other platforms has been light and cannot be guaranteed.</p>
+
+<p>The documentation isn&#39;t feature complete yet and not all functions are
+documented.</p>
+
+<h2 id="label-Development">Development</h2>
+
+<p>If you like to add or improve this module, feel free to fork the module and
+send me a merge request with the modification.</p>
+</div></div>
+
+    <div id="footer">
+  Generated on Tue Dec 15 17:07:41 2015 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.7.6 (ruby-2.2.3).
+</div>
+
+  </body>
+</html>
