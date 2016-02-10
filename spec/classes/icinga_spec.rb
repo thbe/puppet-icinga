@@ -22,6 +22,7 @@ describe 'icinga', :type => :class do
 
       it { is_expected.to compile.with_all_deps }
 
+      it { is_expected.to contain_class('icinga::params') }
       it { is_expected.to contain_class('icinga::package') }
       it { is_expected.to contain_class('icinga::package::client') }
       it { is_expected.to contain_class('icinga::package::server') }
@@ -43,8 +44,37 @@ describe 'icinga', :type => :class do
       it { is_expected.to contain_package('icingaweb2').with_ensure('installed') }
       it { is_expected.to contain_package('icinga2-ido-mysql').with_ensure('installed') }
 
+      it { is_expected.to contain_package('httpd').with_ensure('installed') }
+      it { is_expected.to contain_package('net-snmp-devel').with_ensure('installed') }
+      it { is_expected.to contain_package('net-snmp-utils').with_ensure('installed') }
+      it { is_expected.to contain_package('net-snmp').with_ensure('installed') }
+      it { is_expected.to contain_package('php-gd').with_ensure('installed') }
+      it { is_expected.to contain_package('php-ldap').with_ensure('installed') }
+      it { is_expected.to contain_package('php-mysql').with_ensure('installed') }
+      it { is_expected.to contain_package('php').with_ensure('installed') }
+      it { is_expected.to contain_package('rrdtool-perl').with_ensure('installed') }
+      it { is_expected.to contain_package('rrdtool').with_ensure('installed') }
+
+      it { is_expected.to contain_file('/etc/icinga2/conf.d/custom').with_ensure('directory') }
+      it { is_expected.to contain_file('/etc/icinga2/conf.d/puppet').with_ensure('directory') }
+
       it { is_expected.to contain_file('/etc/nagios/nrpe.cfg').with_ensure('file') }
       it { is_expected.to contain_file('/etc/nrpe.d/base.cfg').with_ensure('file') }
+      it { is_expected.to contain_file('/etc/icinga2/features-available/ido-mysql.conf').with_ensure('file') }
+      it { is_expected.to contain_file('/etc/icinga2/populate_icinga_schema.sh').with_ensure('file') }
+
+      it { is_expected.to contain_file('/etc/icinga2/features-enabled/checker.conf').with_ensure('link') }
+      it { is_expected.to contain_file('/etc/icinga2/features-enabled/command.conf').with_ensure('link') }
+      it { is_expected.to contain_file('/etc/icinga2/features-enabled/graphite.conf').with_ensure('link') }
+      it { is_expected.to contain_file('/etc/icinga2/features-enabled/ido-mysql.conf').with_ensure('link') }
+      it { is_expected.to contain_file('/etc/icinga2/features-enabled/mainlog.conf').with_ensure('link') }
+      it { is_expected.to contain_file('/etc/icinga2/features-enabled/notification.conf').with_ensure('link') }
+      it { is_expected.to contain_file('/etc/icinga2/features-enabled/syslog.conf').with_ensure('link') }
+
+      it { is_expected.to contain_file('/etc/icingaweb2/enabledModules').with_ensure('directory') }
+
+      it { is_expected.to contain_file('/etc/icingaweb2/enabledModules/doc').with_ensure('link') }
+      it { is_expected.to contain_file('/etc/icingaweb2/enabledModules/monitoring').with_ensure('link') }
 
       it 'should generate valid content for nrpe.cfg - generic part' do
         content = catalogue.resource('file', '/etc/nagios/nrpe.cfg').send(:parameters)[:content]
@@ -58,6 +88,7 @@ describe 'icinga', :type => :class do
 
       it { is_expected.to contain_service('nrpe').with( 'ensure' => 'running', 'enable' => 'true') }
       it { is_expected.to contain_service('icinga2').with( 'ensure' => 'running', 'enable' => 'true') }
+      it { is_expected.to contain_service('httpd').with( 'ensure' => 'running', 'enable' => 'true') }
 
       case facts[:operatingsystem]
       when 'RedHat'
