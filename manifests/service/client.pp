@@ -13,10 +13,9 @@
 class icinga::service::client {
 
   # Icinga service configuration
-  service {
-    $icinga::params::service_nrpe:
-      ensure  => 'running',
-      enable  => true,
-      require => Package[$icinga::params::package_nrpe];
+  service { $icinga::params::service_nrpe:
+    ensure  => 'running',
+    enable  => true,
+    require => Package[$icinga::params::package_nrpe];
   }
 }

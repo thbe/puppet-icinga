@@ -13,12 +13,8 @@
 class icinga::package::client {
 
   # Client relevant packages
-
-  package { $icinga::params::package_nrpe: ensure => installed; }
-
-  package { $icinga::params::package_nagios_plugins: ensure => installed; }
-
+  package { $icinga::params::package_nrpe:                ensure => installed; }
+  package { $icinga::params::package_nagios_plugins:      ensure => installed; }
   package { $icinga::params::package_nagios_plugins_perl: ensure => installed; }
-
-  package { $icinga::params::package_nagios_plugins_all: ensure => installed; }
+  package { $icinga::params::package_nagios_plugins_all:  ensure => installed; }
 }
