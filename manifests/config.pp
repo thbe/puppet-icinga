@@ -16,6 +16,7 @@ class icinga::config {
   }
 
   if $icinga::type == 'server' {
+    include icinga::config::client
     include icinga::config::mysql
     include icinga::config::server
   }

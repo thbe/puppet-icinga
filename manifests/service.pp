@@ -17,6 +17,7 @@ class icinga::service {
   }
 
   if $icinga::type == 'server' {
+    include icinga::service::client
     include icinga::service::server
   }
 }

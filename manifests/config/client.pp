@@ -15,20 +15,14 @@ class icinga::config::client {
   # Setup NRPE client
   file {
     $icinga::params::config_nrpe_config:
-      ensure  => present,
+      ensure  => file,
       mode    => '0644',
-      owner   => root,
-      group   => root,
-      path    => $icinga::params::config_nrpe_config,
       content => template($icinga::params::config_nrpe_config_template),
       require => Package[$icinga::params::package_nrpe];
 
     $icinga::params::config_nrpe_config_base:
-      ensure  => present,
+      ensure  => file,
       mode    => '0644',
-      owner   => root,
-      group   => root,
-      path    => $icinga::params::config_nrpe_config_base,
       content => template($icinga::params::config_nrpe_config_base_template),
       require => Package[$icinga::params::package_nrpe];
   }
@@ -49,7 +43,7 @@ class icinga::config::client {
     }
 
     @@nagios_host { $::fqdn:
-      ensure     => present,
+      ensure     => file,
       alias      => $::hostname,
       address    => $::ipaddress,
       use        => $icinga_host_template,
@@ -58,7 +52,7 @@ class icinga::config::client {
     }
 
     #@@nagios_hostextinfo { $::fqdn:
-    #  ensure          => present,
+    #  ensure          => file,
     #  icon_image_alt  => $::operatingsystem,
     #  icon_image      => "${icinga::params::iconfile}.png",
     #  statusmap_image => "${icinga::params::iconfile}.gd2",

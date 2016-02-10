@@ -85,20 +85,16 @@ class icinga::config::mysql {
   # Setup Icinga server
   file {
     $icinga::params::config_icinga2_ido_mysql:
-      ensure  => present,
+      ensure  => file,
       mode    => '0640',
       owner   => icinga,
       group   => icinga,
-      path    => $icinga::params::config_icinga2_ido_mysql,
       content => template($icinga::params::config_icinga2_ido_mysql_template),
       require => Package[$icinga::params::package_icinga2_ido_mysql];
 
     $icinga::params::config_schema_script:
-      ensure  => present,
+      ensure  => file,
       mode    => '0755',
-      owner   => root,
-      group   => root,
-      path    => $icinga::params::config_schema_script,
       source  => $icinga::params::config_schema_script_file,
       require => Package[$icinga::params::package_icinga2_ido_mysql];
   }

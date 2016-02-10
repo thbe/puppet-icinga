@@ -9,6 +9,7 @@
   "issues_url": "https://github.com/thbe/puppet-icinga/issues",
   "operatingsystem_support": [
     { "operatingsystem": "RedHat", "operatingsystemrelease": [ "7.0" ] },
+    { "operatingsystem": "OracleLinux", "operatingsystemrelease": [ "7.0" ] },
     { "operatingsystem": "CentOS", "operatingsystemrelease": [ "7.0" ] },
     { "operatingsystem": "Scientific", "operatingsystemrelease": [ "7.0" ] }
   ],
