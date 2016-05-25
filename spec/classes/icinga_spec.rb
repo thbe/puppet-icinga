@@ -34,6 +34,11 @@ describe 'icinga', :type => :class do
       it { is_expected.to contain_class('icinga::service::client') }
       it { is_expected.to contain_class('icinga::service::server') }
 
+      it { is_expected.to contain_class('mysql::server') }
+      it { is_expected.to contain_class('mysql::server::backup') }
+      it { is_expected.to contain_class('mysql::server::account_security') }
+      it { is_expected.to contain_class('mysql::server::mysqltuner') }
+
       it { is_expected.to contain_package('nrpe').with_ensure('installed') }
       it { is_expected.to contain_package('nagios-plugins').with_ensure('installed') }
       it { is_expected.to contain_package('nagios-plugins-perl').with_ensure('installed') }
@@ -89,6 +94,20 @@ describe 'icinga', :type => :class do
       it { is_expected.to contain_service('nrpe').with( 'ensure' => 'running', 'enable' => 'true') }
       it { is_expected.to contain_service('icinga2').with( 'ensure' => 'running', 'enable' => 'true') }
       it { is_expected.to contain_service('httpd').with( 'ensure' => 'running', 'enable' => 'true') }
+
+      it { is_expected.to contain_exec('/etc/icinga/populate_icinga_schema.sh').with(
+        'path'   => '/bin:/sbin:/usr/bin:/usr/sbin',
+        'onlyif' => 'test -x /etc/icinga/populate_icinga_schema.sh',
+        'unless' => 'test -f /etc/sysconfig/mysqldb_icinga && test -f /etc/sysconfig/mysqldb_icinga_web'
+        )
+      }
+
+      it { is_expected.to contain_mysql_database('icinga') }
+      it { is_expected.to contain_mysql_database('icingaweb_db') }
+      it { is_expected.to contain_mysql_grant('icinga@localhost/icinga.*') }
+      it { is_expected.to contain_mysql_grant('icingaweb_db@localhost/icingaweb_db.*') }
+      it { is_expected.to contain_mysql_user('icinga@localhost') }
+      it { is_expected.to contain_mysql_user('icingaweb_db@localhost') }
 
       case facts[:operatingsystem]
       when 'RedHat'

@@ -1,4 +1,30 @@
-# define: icinga::config::object::command
+# Define: icinga::config::object::command
+#
+# This define handle the command part of exported ressources
+#
+# Parameters:
+#
+# * `command_line`
+#   Specify the command line
+#
+# * `command_name`
+#   Specify the command name
+#
+# * `args`
+#   Specify arguments
+#
+# * `vars`
+#   Specify variables
+#
+# * `target`
+#   Specify target filename
+#
+# Actions:      This define has no actions
+#
+# Requires:     This define has no requirements
+#
+# Sample Usage: icinga::config::object::dependency
+#
 define icinga::config::object::command (
   $command_line,
   $command_name   = $title,

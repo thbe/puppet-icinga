@@ -87,4 +87,11 @@ class icinga::params {
       $linux                                      = false
     }
   }
+
+  # Standard Icinga settings
+  $type               = 'client'
+  $server_acl         = '127.0.0.1'
+  $plugins            = ['none']
+  $exported_resources = false
+  $exported_sla       = '24x7'
 }

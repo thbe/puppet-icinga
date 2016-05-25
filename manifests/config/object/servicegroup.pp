@@ -1,3 +1,27 @@
+# Define: icinga::config::object::servicegroup
+#
+# This define handle the host part of exported ressources
+#
+# Parameters:
+#
+# * `servicegroup_name`
+#   Specify the service group name
+#
+# * `display_name`
+#   Specify the display name
+#
+# * `groups`
+#   Specify the groups
+#
+# * `target`
+#   Specify target filename
+#
+# Actions:      This define has no actions
+#
+# Requires:     This define has no requirements
+#
+# Sample Usage: icinga::config::object::servicegroup
+#
 define icinga::config::object::servicegroup (
   $servicegroup_name = $title,
   $display_name      = $title,

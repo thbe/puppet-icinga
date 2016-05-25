@@ -107,11 +107,28 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>
-<p>define: icinga::config::object::service_parametrized</p>
+<p>Define: icinga::config::object::service_parametrized</p>
+
+<p>This define handle the host part of exported ressources</p>
 
 <p>This definition is a wrapper around icinga2::object::service. It allows
 definitions of services which need the name of the service as part of the
 check command, like filesystem and SMART checks.</p>
+
+<p>Parameters:</p>
+<ul><li>
+<p>`check_command` Specify the check command</p>
+</li><li>
+<p>`command` Specify the command</p>
+</li><li>
+<p>`groups` Specify the groups</p>
+</li></ul>
+
+<p>Actions:      This define has no actions</p>
+
+<p>Requires:     This define has no requirements</p>
+
+<p>Sample Usage: icinga::config::object::host</p>
 </p>
   </div>
 </div>
@@ -129,9 +146,9 @@ check command, like filesystem and SMART checks.</p>
 </div>
 
     <div id="footer">
-  Generated on Tue Dec 15 17:07:41 2015 by
+  Generated on Tue Feb 16 11:15:21 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.2.3).
+  0.8.7.6 (ruby-2.3.0).
 </div>
 
   </body>

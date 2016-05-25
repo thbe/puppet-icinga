@@ -1,3 +1,42 @@
+# Define: icinga::config::object::service
+#
+# This define handle the service part of exported ressources
+#
+# Parameters:
+#
+# * `service_name`
+#   Specify the service name
+#
+# * `host_name`
+#   Specify the host name
+#
+# * `check_command`
+#   Specify the check command
+#
+# * `check_interval`
+#   Specify the check interval
+#
+# * `retry_interval`
+#   Specify the retry interval
+#
+# * `groups`
+#   Specify the groups
+#
+# * `sla`
+#   Specify SLA
+#
+# * `vars`
+#   Specify variables
+#
+# * `target`
+#   Specify target filename
+#
+# Actions:      This define has no actions
+#
+# Requires:     This define has no requirements
+#
+# Sample Usage: icinga::config::object::service
+#
 define icinga::config::object::service (
   $service_name   = $title,
   $host_name      = $::fqdn,

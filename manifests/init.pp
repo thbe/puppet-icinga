@@ -13,17 +13,21 @@
 #   Specify if client or server components should be installed
 #   Default value is client
 #
+# * `server_acl`
+#   Specify the Icinga servers that are allowed to access monitoring client
+#   Default value is 127.0.0.1
+#
 # * `plugins`
 #   Specify one or more plugins that should be installed
 #   Default value is none (not implemented yet)
 #
 # * `exported_ressources`
 #   Specify if exported resources should be used
-#   Default value is false (not implemented yet)
+#   Default value is false
 #
-# * `server_acl`
-#   Specify the Icinga servers that are allowed to access monitoring client
-#   Default value is 127.0.0.1
+# * `exported_sla`
+#   Specify the sla for the resource that should be used
+#   Default value is 24x7
 #
 # Variables
 # ----------
@@ -49,10 +53,11 @@
 # Copyright 2016 Thomas Bendler, unless otherwise noted.
 #
 class icinga (
-  $type               = 'client',
-  $server_acl         = '127.0.0.1',
-  $plugins            = ['none'],
-  $exported_resources = false,
+  $type               = $icinga::params::type,
+  $server_acl         = $icinga::params::server_acl,
+  $plugins            = $icinga::params::plugins,
+  $exported_resources = $icinga::params::exported_resources,
+  $exported_sla       = $icinga::params::exported_sla
 ) inherits icinga::params {
 
   # Start workflow

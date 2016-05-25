@@ -1,3 +1,36 @@
+# Define: icinga::config::object::host
+#
+# This define handle the host part of exported ressources
+#
+# Parameters:
+#
+# * `host_name`
+#   Specify the host name
+#
+# * `address`
+#   Specify IPv4 address
+#
+# * `address6`
+#   Specify IPv6 address
+#
+# * `import`
+#   Specify host template
+#
+# * `os`
+#   Specify operating system
+#
+# * `sla`
+#   Specify SLA
+#
+# * `target`
+#   Specify target filename
+#
+# Actions:      This define has no actions
+#
+# Requires:     This define has no requirements
+#
+# Sample Usage: icinga::config::object::host
+#
 define icinga::config::object::host (
   $host_name = $title,
   $address   = false,
