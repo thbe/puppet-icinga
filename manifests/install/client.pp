@@ -1,19 +1,19 @@
-# Class: icinga::package::client
+# Class: icinga::c::client
 #
 # This class contain the packages for Icinga 2 client installation
 #
-# Parameters:   This module has no parameters
+# Parameters:   This class has no parameters
 #
-# Actions:      This module has no actions
+# Actions:      This class has no actions
 #
-# Requires:     This module has no requirements
+# Requires:     This class has no requirements
 #
-# Sample Usage: include icinga::package::client
+# Sample Usage:
 #
-class icinga::package::client {
+class icinga::install::client {
 
   # Client relevant packages
-  package { $icinga::params::package_nrpe:                ensure => installed; }
+  package { $icinga::params::package_icinga2_bin:         ensure => installed; }
   package { $icinga::params::package_nagios_plugins:      ensure => installed; }
   package { $icinga::params::package_nagios_plugins_perl: ensure => installed; }
   package { $icinga::params::package_nagios_plugins_all:  ensure => installed; }

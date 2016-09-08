@@ -14,6 +14,7 @@ MYSQL_PASSWORD=${1:-0nly4install}
 # Define schema
 SCHEMA_IDO=$(ls -1 /usr/share/icinga2-ido-mysql/schema/mysql.sql)
 SCHEMA_WEB2=$(ls -1 /usr/share/doc/icingaweb2/schema/mysql.schema.sql)
+ADMIN_USER=$(ls -1 /etc/icinga2/icingaadmin.sql)
 
 # Populate icinga ido schema and write status to sysconfig
 if [ ! -f /etc/sysconfig/mysqldb_icinga ]; then
@@ -41,6 +42,21 @@ if [ ! -f /etc/sysconfig/mysqldb_icingaweb2 ]; then
       echo "Icinga web2 database schema created" > /etc/sysconfig/mysqldb_icingaweb2
     else
       echo "Can not create Icinga web2 schema"; exit 1
+    fi
+  fi
+fi
+
+# Create initial adminstrative account
+if [ ! -f /etc/sysconfig/mysqldb_icingaweb2_admin_user ]; then
+  ${MYSQL_COMMAND} -u ${MYSQL_USER} -p${MYSQL_PASSWORD} icingaweb_db < ${ADMIN_USER}
+  if [ ${?} -eq 0 ]; then
+    echo "Icinga web2 adminstrative user created" > /etc/sysconfig/mysqldb_icingaweb2
+  else
+    ${MYSQL_COMMAND} -u ${MYSQL_USER} icingaweb_db < ${ADMIN_USER}
+    if [ ${?} -eq 0 ]; then
+      echo "Icinga web2 adminstrative user created" > /etc/sysconfig/mysqldb_icingaweb2_admin_user
+    else
+      echo "Can not create Icinga web2 adminstrative user"; exit 1
     fi
   fi
 fi

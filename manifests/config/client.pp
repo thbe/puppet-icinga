@@ -12,32 +12,17 @@
 #
 class icinga::config::client {
 
-  # Setup NRPE client
-  file {
-    $icinga::params::config_nrpe_config:
-      ensure  => file,
-      mode    => '0644',
-      content => template($icinga::params::config_nrpe_config_template),
-      require => Package[$icinga::params::package_nrpe];
-
-    $icinga::params::config_nrpe_config_base:
-      ensure  => file,
-      mode    => '0644',
-      content => template($icinga::params::config_nrpe_config_base_template),
-      require => Package[$icinga::params::package_nrpe];
-  }
-
   # Include exported ressources if enabled
   if $icinga::exported_resources {
     if $::kernel == 'Linux' {
       $icinga_hostgroup = $::hostgroup ? {
-        storage => 'puppet,linux,storage',
-        sap     => 'puppet,linux,sap',
-        default => 'puppet,linux'
+        'storage' => 'puppet,linux,storage',
+        'sap'     => 'puppet,linux,sap',
+        'default' => 'puppet,linux'
         }
       $icinga_host_template        = 'linux-server'
       $icinga_service_template     = 'linux-service'
-      #$icinga_service_notification = '24x7'
+      $icinga_service_notification = '24x7'
       $icinga_service_notification = 'workhours'
       $icinga_service_groups       = 'puppet,base'
     }

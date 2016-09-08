@@ -24,11 +24,11 @@ class icinga::config::server {
     require => Package[$icinga::params::package_icinga2];
   }
 
-  file { $icinga::params::config_icinga2_link_graphite:
-    ensure  => link,
-    target  => $icinga::params::config_icinga2_feature_graphite,
-    require => Package[$icinga::params::package_icinga2];
-  }
+  # file { $icinga::params::config_icinga2_link_graphite:
+  #   ensure  => link,
+  #   target  => $icinga::params::config_icinga2_feature_graphite,
+  #   require => Package[$icinga::params::package_icinga2];
+  # }
 
   file { $icinga::params::config_icinga2_link_ido_mysql:
     ensure  => link,

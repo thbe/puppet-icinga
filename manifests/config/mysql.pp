@@ -98,4 +98,11 @@ class icinga::config::mysql {
     source  => $icinga::params::config_schema_script_file,
     require => Package[$icinga::params::package_icinga2_ido_mysql];
   }
+
+  file { $icinga::params::config_admin_user_script:
+    ensure  => file,
+    mode    => '0755',
+    source  => $icinga::params::config_admin_user_script_file,
+    require => File[$icinga::params::config_schema_script];
+  }
 }

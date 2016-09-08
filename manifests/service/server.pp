@@ -13,12 +13,6 @@
 class icinga::service::server {
 
   # Icinga service configuration
-  service { $icinga::params::service_icinga2:
-    ensure  => 'running',
-    enable  => true,
-    require => Package[$icinga::params::package_icinga2];
-  }
-
   service { $icinga::params::service_httpd:
     ensure  => 'running',
     enable  => true,

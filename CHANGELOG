@@ -1,3 +1,7 @@
+0.8.5 2016-09-08 thbe <project@bendler-net.de>
+ * Switch from nrpe to icinga client
+ * Add initial icingaadmin user
+
 0.8.0 2016-02-10 thbe <project@bendler-net.de>
  * Enhance test suite
  * Add OEL support

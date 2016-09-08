@@ -60,17 +60,26 @@ class icinga (
   $exported_sla       = $icinga::params::exported_sla
 ) inherits icinga::params {
 
+  # Validate parameters
+  validate_string($icinga::type)
+  validate_string($icinga::server_acl)
+  validate_array($icinga::plugins)
+  validate_bool($icinga::exported_resources)
+  validate_string($icinga::exported_sla)
+
+  if $type != client {
+    if $type != server {
+      $type = $icinga::params::type
+      warning('Not supported icinga type, switch back to default value!')
+    }
+  }
+
   # Start workflow
   if $icinga::params::linux {
-    # Containment
-    contain icinga::package
-    contain icinga::config
-    contain icinga::service
-
-    # Include classes
-    Class['icinga::package'] ->
-    Class['icinga::config'] ->
-    Class['icinga::service']
+    class{'icinga::install': } ->
+    class{'icinga::config': } ~>
+    class{'icinga::service': } ->
+    Class['icinga']
   }
   else {
     warning('The current operating system is not supported!')

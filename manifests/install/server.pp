@@ -1,4 +1,4 @@
-# Class: icinga::package::server
+# Class: icinga::install::server
 #
 # This class contain the packages for Icinga 2 server installation
 #
@@ -8,9 +8,9 @@
 #
 # Requires:     This module has no requirements
 #
-# Sample Usage: include icinga::package::server
+# Sample Usage:
 #
-class icinga::package::server {
+class icinga::install::server {
 
   # Server relevant packages
   package { $icinga::params::package_icinga2:           ensure => installed; }

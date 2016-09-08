@@ -23,9 +23,9 @@ describe 'icinga', :type => :class do
       it { is_expected.to compile.with_all_deps }
 
       it { is_expected.to contain_class('icinga::params') }
-      it { is_expected.to contain_class('icinga::package') }
-      it { is_expected.to contain_class('icinga::package::client') }
-      it { is_expected.to contain_class('icinga::package::server') }
+      it { is_expected.to contain_class('icinga::install') }
+      it { is_expected.to contain_class('icinga::install::client') }
+      it { is_expected.to contain_class('icinga::install::server') }
       it { is_expected.to contain_class('icinga::config') }
       it { is_expected.to contain_class('icinga::config::client') }
       it { is_expected.to contain_class('icinga::config::mysql') }
@@ -39,7 +39,7 @@ describe 'icinga', :type => :class do
       it { is_expected.to contain_class('mysql::server::account_security') }
       it { is_expected.to contain_class('mysql::server::mysqltuner') }
 
-      it { is_expected.to contain_package('nrpe').with_ensure('installed') }
+      it { is_expected.to contain_package('icinga2-bin').with_ensure('installed') }
       it { is_expected.to contain_package('nagios-plugins').with_ensure('installed') }
       it { is_expected.to contain_package('nagios-plugins-perl').with_ensure('installed') }
       it { is_expected.to contain_package('nagios-plugins-all').with_ensure('installed') }
@@ -60,17 +60,17 @@ describe 'icinga', :type => :class do
       it { is_expected.to contain_package('rrdtool-perl').with_ensure('installed') }
       it { is_expected.to contain_package('rrdtool').with_ensure('installed') }
 
+      it { is_expected.to contain_package('bzip2').with_ensure('present') }
+
       it { is_expected.to contain_file('/etc/icinga2/conf.d/custom').with_ensure('directory') }
       it { is_expected.to contain_file('/etc/icinga2/conf.d/puppet').with_ensure('directory') }
 
-      it { is_expected.to contain_file('/etc/nagios/nrpe.cfg').with_ensure('file') }
-      it { is_expected.to contain_file('/etc/nrpe.d/base.cfg').with_ensure('file') }
       it { is_expected.to contain_file('/etc/icinga2/features-available/ido-mysql.conf').with_ensure('file') }
       it { is_expected.to contain_file('/etc/icinga2/populate_icinga_schema.sh').with_ensure('file') }
+      it { is_expected.to contain_file('/etc/icinga2/icingaadmin.sql').with_ensure('file') }
 
       it { is_expected.to contain_file('/etc/icinga2/features-enabled/checker.conf').with_ensure('link') }
       it { is_expected.to contain_file('/etc/icinga2/features-enabled/command.conf').with_ensure('link') }
-      it { is_expected.to contain_file('/etc/icinga2/features-enabled/graphite.conf').with_ensure('link') }
       it { is_expected.to contain_file('/etc/icinga2/features-enabled/ido-mysql.conf').with_ensure('link') }
       it { is_expected.to contain_file('/etc/icinga2/features-enabled/mainlog.conf').with_ensure('link') }
       it { is_expected.to contain_file('/etc/icinga2/features-enabled/notification.conf').with_ensure('link') }
@@ -81,17 +81,6 @@ describe 'icinga', :type => :class do
       it { is_expected.to contain_file('/etc/icingaweb2/enabledModules/doc').with_ensure('link') }
       it { is_expected.to contain_file('/etc/icingaweb2/enabledModules/monitoring').with_ensure('link') }
 
-      it 'should generate valid content for nrpe.cfg - generic part' do
-        content = catalogue.resource('file', '/etc/nagios/nrpe.cfg').send(:parameters)[:content]
-        expect(content).to match('allowed_hosts=192.168.1.20')
-      end
-
-      it 'should generate valid content for base.cfg - generic part' do
-        content = catalogue.resource('file', '/etc/nrpe.d/base.cfg').send(:parameters)[:content]
-        expect(content).to match('/usr/lib64/nagios/plugins/check_ssh')
-      end
-
-      it { is_expected.to contain_service('nrpe').with( 'ensure' => 'running', 'enable' => 'true') }
       it { is_expected.to contain_service('icinga2').with( 'ensure' => 'running', 'enable' => 'true') }
       it { is_expected.to contain_service('httpd').with( 'ensure' => 'running', 'enable' => 'true') }
 

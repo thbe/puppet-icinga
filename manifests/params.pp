@@ -23,6 +23,7 @@ class icinga::params {
 
       # Package definition
       $package_icinga2                            = 'icinga2'
+      $package_icinga2_bin                        = 'icinga2-bin'
       $package_icingacli                          = 'icingacli'
       $package_icingaweb2                         = 'icingaweb2'
       $package_httpd                              = 'httpd'
@@ -50,6 +51,8 @@ class icinga::params {
       $config_icinga2_conf_custom_content         = 'puppet:///modules/icinga/custom/'
       $config_schema_script                       = '/etc/icinga2/populate_icinga_schema.sh'
       $config_schema_script_file                  = 'puppet:///modules/icinga/schema/populate_icinga_schema.sh'
+      $config_admin_user_script                   = '/etc/icinga2/icingaadmin.sql'
+      $config_admin_user_script_file              = 'puppet:///modules/icinga/schema/icingaadmin.sql'
 
       $config_icinga2_link_checker                = '/etc/icinga2/features-enabled/checker.conf'
       $config_icinga2_feature_checker             = '../features-available/checker.conf'
