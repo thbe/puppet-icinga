@@ -1,8 +1,9 @@
 fixtures:
-  forge_modules:
-    stdlib: "puppetlabs/stdlib"
-    mysql: "puppetlabs/mysql"
-    concat: "puppetlabs/concat"
-    staging: "nanliu/staging"
   symlinks:
     icinga: "#{source_dir}"
+  repositories:
+  forge_modules:
+    stdlib: "puppetlabs-stdlib"
+    staging: "puppet-staging"
+    mysql: "puppetlabs-mysql"
+    concat: "puppetlabs-concat"

@@ -33,7 +33,7 @@ define icinga::config::object::service_parametrized(
     host_name     => $::fqdn,
     check_command => $check_command,
     vars          => {
-      nrpe_command => "${command}${name}"
+      nrpe_command => "${command}${name}",
       },
     groups        => $groups,
   }

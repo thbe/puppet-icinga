@@ -13,11 +13,11 @@
 class icinga::install {
 
   if $icinga::type == 'client' {
-    include icinga::install::client
+    include ::icinga::install::client
   }
 
   if $icinga::type == 'server' {
-    include icinga::install::client
-    include icinga::install::server
+    include ::icinga::install::client
+    include ::icinga::install::server
   }
 }

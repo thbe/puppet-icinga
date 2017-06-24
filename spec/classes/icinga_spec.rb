@@ -1,24 +1,12 @@
 require 'spec_helper'
 
 describe 'icinga', :type => :class do
-
-  context 'with defaults for all parameters' do
-    it { should contain_class('icinga') }
-  end
-
   on_supported_os.each do |os, facts|
     context "on #{os}" do
       let(:facts) do
-        facts
+        facts.merge( { root_home: '/root', staging_http_get: 'curl' } )
       end
-
-      let(:params) {
-        {
-          :type => 'server',
-          :server_acl => '192.168.1.20',
-          :exported_resources => false
-        }
-      }
+      let(:params) { { type: 'server', server_acl: '192.168.1.20', exported_resources: false } }
 
       it { is_expected.to compile.with_all_deps }
 
@@ -84,12 +72,7 @@ describe 'icinga', :type => :class do
       it { is_expected.to contain_service('icinga2').with( 'ensure' => 'running', 'enable' => 'true') }
       it { is_expected.to contain_service('httpd').with( 'ensure' => 'running', 'enable' => 'true') }
 
-      it { is_expected.to contain_exec('/etc/icinga/populate_icinga_schema.sh').with(
-        'path'   => '/bin:/sbin:/usr/bin:/usr/sbin',
-        'onlyif' => 'test -x /etc/icinga/populate_icinga_schema.sh',
-        'unless' => 'test -f /etc/sysconfig/mysqldb_icinga && test -f /etc/sysconfig/mysqldb_icinga_web'
-        )
-      }
+      it { is_expected.to contain_exec('/etc/icinga/populate_icinga_schema.sh').with( 'path' => '/bin:/sbin:/usr/bin:/usr/sbin', 'onlyif' => 'test -x /etc/icinga/populate_icinga_schema.sh', 'unless' => 'test -f /etc/sysconfig/mysqldb_icinga && test -f /etc/sysconfig/mysqldb_icinga_web') }
 
       it { is_expected.to contain_mysql_database('icinga') }
       it { is_expected.to contain_mysql_database('icingaweb_db') }
@@ -97,13 +80,6 @@ describe 'icinga', :type => :class do
       it { is_expected.to contain_mysql_grant('icingaweb_db@localhost/icingaweb_db.*') }
       it { is_expected.to contain_mysql_user('icinga@localhost') }
       it { is_expected.to contain_mysql_user('icingaweb_db@localhost') }
-
-      case facts[:operatingsystem]
-      when 'RedHat'
-      when 'OracleLinux'
-      when 'CentOS'
-      when 'Scientific'
-      end
 
       case facts[:osfamily]
       when 'RedHat'

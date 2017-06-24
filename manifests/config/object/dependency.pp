@@ -64,13 +64,13 @@ define icinga::config::object::dependency (
     concat::fragment { "${target}_header":
       target  => $target,
       content => '# THIS FILE IS MANAGED BY PUPPET',
-      order   => '01'
+      order   => '01',
     }
   }
 
   concat::fragment { "${target}_${name}":
     target  => $target,
     content => template('icinga2/object/dependency.erb'),
-    order   => '02'
+    order   => '02',
   }
 }

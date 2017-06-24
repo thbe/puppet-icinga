@@ -13,11 +13,11 @@
 class icinga::service {
 
   if $icinga::type == 'client' {
-    include icinga::service::client
+    include ::icinga::service::client
   }
 
   if $icinga::type == 'server' {
-    include icinga::service::client
-    include icinga::service::server
+    include ::icinga::service::client
+    include ::icinga::service::server
   }
 }

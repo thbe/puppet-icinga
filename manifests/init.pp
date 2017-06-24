@@ -50,7 +50,7 @@
 # Copyright
 # ---------
 #
-# Copyright 2016 Thomas Bendler, unless otherwise noted.
+# Copyright 2017 Thomas Bendler, unless otherwise noted.
 #
 class icinga (
   $type               = $icinga::params::type,
@@ -61,6 +61,7 @@ class icinga (
 ) inherits icinga::params {
 
   # Validate parameters
+  include ::stdlib
   validate_string($icinga::type)
   validate_string($icinga::server_acl)
   validate_array($icinga::plugins)
@@ -76,10 +77,10 @@ class icinga (
 
   # Start workflow
   if $icinga::params::linux {
-    class{'icinga::install': } ->
-    class{'icinga::config': } ~>
-    class{'icinga::service': } ->
-    Class['icinga']
+    class{ '::icinga::install': }
+    -> class{ '::icinga::config': }
+    ~> class{ '::icinga::service': }
+    -> Class['icinga']
   }
   else {
     warning('The current operating system is not supported!')

@@ -16,8 +16,8 @@ class icinga::config::mysql {
     root_password    => '0nly4install',
     override_options => {
       'mysqld' => {
-        'max_connections' => '1024'
-        }
+        'max_connections' => '1024',
+        },
       },
     databases        => {
       'icinga'       => {
@@ -73,13 +73,13 @@ class icinga::config::mysql {
     backupuser     => 'bckadm',
   }
 
-  include mysql::server::account_security
-  include mysql::server::mysqltuner
+  include ::mysql::server::account_security
+  include ::mysql::server::mysqltuner
 
   exec { '/etc/icinga/populate_icinga_schema.sh':
     path   => '/bin:/sbin:/usr/bin:/usr/sbin',
     onlyif => 'test -x /etc/icinga/populate_icinga_schema.sh',
-    unless => 'test -f /etc/sysconfig/mysqldb_icinga && test -f /etc/sysconfig/mysqldb_icinga_web'
+    unless => 'test -f /etc/sysconfig/mysqldb_icinga && test -f /etc/sysconfig/mysqldb_icinga_web',
   }
 
   # Setup Icinga server
