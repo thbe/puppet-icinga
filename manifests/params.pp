@@ -80,7 +80,6 @@ class icinga::params {
       $config_nrpe_config_base                    = '/etc/nrpe.d/base.cfg'
       $config_nrpe_config_base_template           = 'icinga/etc/nrpe.d/base.cfg.erb'
 
-
       # Service definition
       $service_icinga2                            = 'icinga2'
       $service_nrpe                               = 'nrpe'

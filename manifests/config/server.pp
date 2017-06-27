@@ -100,8 +100,8 @@ class icinga::config::server {
   # Include exported ressources if enabled
   if $icinga::exported_resources {
     Icinga::Config::Object::Host         <<| |>> { notify => Service[$icinga::params::service_icinga2] }
-    Icinga::Config::Object::Hostextinfo  <<| |>> { notify => Service[$icinga::params::service_icinga2] }
-    Icinga::Config::Object::Hostgroup    <<| |>> { notify => Service[$icinga::params::service_icinga2] }
+    #Icinga::Config::Object::Hostextinfo  <<| |>> { notify => Service[$icinga::params::service_icinga2] }
+    #Icinga::Config::Object::Hostgroup    <<| |>> { notify => Service[$icinga::params::service_icinga2] }
     Icinga::Config::Object::Service      <<| |>> { notify => Service[$icinga::params::service_icinga2] }
     Icinga::Config::Object::Servicegroup <<| |>> { notify => Service[$icinga::params::service_icinga2] }
   }
