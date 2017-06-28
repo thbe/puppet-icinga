@@ -61,7 +61,6 @@ class icinga (
 ) inherits icinga::params {
 
   # Validate parameters
-  include ::stdlib
   validate_string($icinga::type)
   validate_string($icinga::server_acl)
   validate_array($icinga::plugins)
