@@ -18,7 +18,7 @@ class icinga::config::client {
       $icinga_hostgroup = $::hostgroup ? {
         'storage' => 'puppet,linux,storage',
         'sap'     => 'puppet,linux,sap',
-        'default' => 'puppet,linux'
+        default => 'puppet,linux'
         }
       $icinga_host_template        = 'linux-server'
       $icinga_service_template     = 'linux-service'
